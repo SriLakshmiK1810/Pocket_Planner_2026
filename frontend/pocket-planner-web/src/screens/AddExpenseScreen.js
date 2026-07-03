@@ -8,7 +8,8 @@ function AddExpenseScreen() {
   const [category, setCategory] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
 const [expenseType, setExpenseType] = useState("Need");
-
+ const user = JSON.parse(localStorage.getItem("user"));
+const userId = user?.id;
   const handleSaveExpense = async () => {
     if (!title || !amount || !category) {
       alert("Please fill all fields");
@@ -16,7 +17,7 @@ const [expenseType, setExpenseType] = useState("Need");
     }
 
     try {
-  await api.post("/expenses", {
+  await api.post(`/expenses?userId=${userId}`, {
     title,
     amount: Number(amount),
     category,
@@ -26,17 +27,10 @@ const [expenseType, setExpenseType] = useState("Need");
   });
 
   alert("Expense Added Successfully!");
-
-  setTitle("");
-  setAmount("");
-  setCategory("");
-  setPaymentMode("UPI");
-  setExpenseType("Need");
 } catch (error) {
   console.error(error);
   alert("Failed to save expense");
 }
-
     setTitle("");
     setAmount("");
     setCategory("");

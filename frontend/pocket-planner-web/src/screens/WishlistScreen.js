@@ -5,10 +5,12 @@ function WishlistScreen() {
   const [itemName, setItemName] = useState("");
   const [price, setPrice] = useState("");
   const [reason, setReason] = useState("");
-
-  const [wishlist, setWishlist] = useState(
-    JSON.parse(localStorage.getItem("wishlist")) || []
-  );
+const user = JSON.parse(localStorage.getItem("user"));
+const userId = user?.id;
+const wishlistKey = `wishlist_${userId}`;
+ const [wishlist, setWishlist] = useState(
+  JSON.parse(localStorage.getItem(wishlistKey)) || []
+);
 
   const handleAdd = () => {
     if (!itemName || !price || !reason) {
@@ -28,10 +30,7 @@ function WishlistScreen() {
 
     setWishlist(updatedWishlist);
 
-    localStorage.setItem(
-      "wishlist",
-      JSON.stringify(updatedWishlist)
-    );
+   localStorage.setItem(wishlistKey, JSON.stringify(updatedWishlist));
 
     setItemName("");
     setPrice("");
@@ -45,10 +44,7 @@ function WishlistScreen() {
 
     setWishlist(updatedWishlist);
 
-    localStorage.setItem(
-      "wishlist",
-      JSON.stringify(updatedWishlist)
-    );
+   localStorage.setItem(wishlistKey, JSON.stringify(updatedWishlist));
   };
 
   return (

@@ -12,6 +12,8 @@ const [expenseData, setExpenseData] = useState({
   paymentMode: "UPI",
   expenseType: "Need",
 });
+const user = JSON.parse(localStorage.getItem("user"));
+const userId = user?.id;
 const handleScan = async () => {
   if (!image) {
     alert("Capture a bill first");
@@ -45,8 +47,10 @@ const handleScan = async () => {
 const handleSave = async () => {
   try {
     console.log(expenseData);
-    await api.post("/expenses", expenseData);
-
+    await api.post(`/expenses?userId=${userId}`, {
+  ...expenseData,
+  amount: Number(expenseData.amount),
+});
     alert("Expense saved successfully!");
 
     setExpenseData({

@@ -43,6 +43,21 @@ setRecentExpenses(expenseResponse.data.slice(-5).reverse());
     console.log(error);
   }
 };
+const currentMonth = new Date().getMonth();
+const currentYear = new Date().getFullYear();
+
+const monthlyExpenses = allExpenses.filter((expense) => {
+  const expenseDate = new Date(expense.date);
+  return (
+    expenseDate.getMonth() === currentMonth &&
+    expenseDate.getFullYear() === currentYear
+  );
+});
+
+const monthlyTotal = monthlyExpenses.reduce(
+  (sum, expense) => sum + Number(expense.amount),
+  0
+);
   return (
   <div style={{ display: "flex", minHeight: "100vh" }}>
   <Sidebar />

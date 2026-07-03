@@ -6,6 +6,8 @@ function ExpenseListScreen() {
   const [filterCategory, setFilterCategory] = useState("All");
 const [sortBy, setSortBy] = useState("Newest");
 const [budget,setBudget]=useState(0);
+const user = JSON.parse(localStorage.getItem("user"));
+const userId = user?.id;
 useEffect(() => {
   fetchExpenses();
 }, []);
@@ -13,12 +15,8 @@ useEffect(() => {
 const fetchExpenses = async () => {
   try {
     // Fetch expenses
-    const expenseRes = await api.get("/expenses");
-    setExpenses(expenseRes.data);
-
-    // Fetch latest budget
-const budgetRes = await api.get("/budgets/latest");
-
+    const expenseRes = await api.get(`/expenses?userId=${userId}`);
+const budgetRes = await api.get(`/budgets/latest?userId=${userId}`);
 console.log("Latest Budget:", budgetRes.data);
 
 if (budgetRes.data) {

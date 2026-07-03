@@ -38,9 +38,10 @@ function ChangePasswordScreen() {
         newPassword: newPassword,
       });
 
-      alert("Password changed successfully!");
-
-      navigate("/profile");
+      alert("Password changed successfully. Please log in again.");
+localStorage.removeItem("user");
+localStorage.removeItem("isLoggedIn");
+navigate("/login");
     } catch (error) {
       console.log(error);
       alert(
