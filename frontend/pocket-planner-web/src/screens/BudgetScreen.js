@@ -3,6 +3,9 @@ import Sidebar from "../components/Sidebar";
 import api from "../services/api";
 
 function BudgetScreen() {
+  const user = JSON.parse(localStorage.getItem("user"));
+const userId = user?.id;
+
   const [budget, setBudget] = useState({
     amount: "",
     period: "Monthly",
@@ -39,7 +42,7 @@ function BudgetScreen() {
   e.preventDefault();
 
   try {
-  await api.post("/budgets", {
+  await api.post(`/budgets?userId=${userId}`, {
   amount: Number(budget.amount),
   period: budget.period,
   startDate: budget.startDate,
