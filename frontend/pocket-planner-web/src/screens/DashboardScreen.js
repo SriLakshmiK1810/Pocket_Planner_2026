@@ -184,7 +184,7 @@ padding: isMobile ? "15px" : "30px",
     color: "#6B7280",
   }}
 >Expenses Logged</p>
-      <h3>{recentExpenses.length}</h3>
+      <h3>{monthlyExpenses.length}</h3>
     </div>
 
     <div>
@@ -195,13 +195,10 @@ padding: isMobile ? "15px" : "30px",
   }}
 >Average Expense</p>
       <h3>
-        ₹
-        {recentExpenses.length > 0
-          ? Math.round(
-              dashboard.totalExpenses / recentExpenses.length
-            )
-          : 0}
-      </h3>
+  ₹{monthlyExpenses.length > 0
+    ? Math.round(monthlyTotal / monthlyExpenses.length)
+    : 0}
+</h3>
     </div>
 
     <div>
@@ -212,13 +209,10 @@ padding: isMobile ? "15px" : "30px",
   }}
 >Largest Expense</p>
       <h3>
-        ₹
-        {recentExpenses.length > 0
-          ? Math.max(
-              ...recentExpenses.map(e => Number(e.amount))
-            )
-          : 0}
-      </h3>
+  ₹{monthlyExpenses.length > 0
+    ? Math.max(...monthlyExpenses.map((e) => Number(e.amount)))
+    : 0}
+</h3>
     </div>
   </div>
 </section>
