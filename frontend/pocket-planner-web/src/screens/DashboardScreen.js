@@ -27,16 +27,16 @@ const [recentExpenses, setRecentExpenses] = useState([]);
 useEffect(() => {
   fetchDashboard();
 }, []);
-
+const user = JSON.parse(localStorage.getItem("user"));
+const userId = user?.id;
 const fetchDashboard = async () => {
   try {
-    const dashboardResponse = await api.get("/dashboard");
-    setDashboard(dashboardResponse.data);
-
-    const expenseResponse = await api.get("/expenses");
-    setAllExpenses(expenseResponse.data);
-    const budgetResponse = await api.get("/budgets/latest");
+   const dashboardResponse = await api.get(`/dashboard?userId=${userId}`);
+const expenseResponse = await api.get(`/expenses?userId=${userId}`);
+const budgetResponse = await api.get(`/budgets/latest?userId=${userId}`);
 setLatestBudget(budgetResponse.data);
+setDashboard(dashboardResponse.data);
+setAllExpenses(expenseResponse.data);
 setRecentExpenses(expenseResponse.data.slice(-5).reverse());
   } catch (error) {
     console.log(error);

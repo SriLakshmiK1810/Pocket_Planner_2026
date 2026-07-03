@@ -13,6 +13,7 @@ function LoginScreen() {
       email,
       password,
     });
+    console.log("Logged-in user:", response.data);
 
     localStorage.setItem(
       "user",
