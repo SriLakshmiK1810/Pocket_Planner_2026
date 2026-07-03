@@ -10,12 +10,16 @@ const user = JSON.parse(localStorage.getItem("user"));
 const userId = user?.id;
 useEffect(() => {
   fetchExpenses();
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
 const fetchExpenses = async () => {
   try {
-    // Fetch expenses
     const expenseRes = await api.get(`/expenses?userId=${userId}`);
+setExpenses(expenseRes.data);
+    // Fetch expenses
+    // const expenseRes = await api.get(`/expenses?userId=${userId}`);
 const budgetRes = await api.get(`/budgets/latest?userId=${userId}`);
 console.log("Latest Budget:", budgetRes.data);
 
