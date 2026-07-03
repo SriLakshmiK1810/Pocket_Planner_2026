@@ -26,6 +26,7 @@ const [allExpenses, setAllExpenses] = useState([]);
 const [recentExpenses, setRecentExpenses] = useState([]);
 useEffect(() => {
   fetchDashboard();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 const user = JSON.parse(localStorage.getItem("user"));
 const userId = user?.id;

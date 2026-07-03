@@ -13,7 +13,6 @@ public class BudgetController {
     private BudgetService budgetService;
 
     @PostMapping
-    pu@PostMapping
 public Budget saveBudget(
         @RequestBody Budget budget,
         @RequestParam Long userId

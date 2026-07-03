@@ -24,20 +24,20 @@ public class ExpenseController {
         return expenseService.addExpense(expense);
     }
 
-    @GetMapping
-    public List<Expense> getAllExpenses() {
-        return expenseService.getAllExpenses();
-    }
+   @GetMapping
+public List<Expense> getAllExpenses(@RequestParam Long userId) {
+    return expenseService.getAllExpenses(userId);
+}
 
-    @GetMapping("/category-summary")
-    public Map<String, Double> getCategorySummary() {
-        return expenseService.getCategorySummary();
-    }
+@GetMapping("/category-summary")
+public Map<String, Double> getCategorySummary(@RequestParam Long userId) {
+    return expenseService.getCategorySummary(userId);
+}
 
-    @GetMapping("/total")
-    public Double getTotalExpenses() {
-        return expenseService.getTotalExpenses();
-    }
+@GetMapping("/total")
+public Double getTotalExpenses(@RequestParam Long userId) {
+    return expenseService.getTotalExpenses(userId);
+}
 
     @PutMapping("/{id}")
     public Expense updateExpense(@PathVariable Long id,
