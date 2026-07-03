@@ -13,6 +13,7 @@ import ChangePasswordScreen from "./screens/ChangePasswordScreen";
 import ChangeEmailScreen from "./screens/ChangeEmailScreen";
 import DeleteAccountScreen from "./screens/DeleteAccountScreen";
 import SettingsScreen from "./screens/SettingsScreen";
+import "./App.css";
 function App() {
   return (
     <BrowserRouter>

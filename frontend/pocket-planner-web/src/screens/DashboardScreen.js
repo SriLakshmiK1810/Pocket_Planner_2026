@@ -67,7 +67,6 @@ const monthlyTotal = monthlyExpenses.reduce(
       ...mainContent,
      background: "#F8FAFC",
 color: "#111827",
- marginLeft: isMobile ? "0" : "250px",
 marginTop: isMobile ? "70px" : "0",
 padding: isMobile ? "15px" : "30px",
       transition: "0.3s",
@@ -489,7 +488,7 @@ function ExpenseItem({ label, value }) {
 
 const mainContent = {
   flex: 1,
-  padding: "20px",
+  padding: "30px",
   minWidth: 0,
   boxSizing: "border-box",
   overflowX: "hidden",
@@ -497,10 +496,9 @@ const mainContent = {
 
 const summaryGrid = {
   display: "grid",
-  gridTemplateColumns: window.innerWidth < 768
-    ? "1fr"
-    : "repeat(3, 1fr)",
+  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
   gap: "20px",
+  marginBottom: "25px",
 };
 const summaryCard = {
   padding: "25px",
@@ -523,7 +521,7 @@ const expenseItem = {
 
 const detailsGrid = {
   display: "grid",
-  gridTemplateColumns: "1.5fr 1fr",
+  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
   gap: "20px",
 };
 
