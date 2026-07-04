@@ -479,13 +479,6 @@ function ExpenseItem({ label, value }) {
   );
 }
 
-const mainContent = {
-  flex: 1,
-  padding: "30px",
-  minWidth: 0,
-  boxSizing: "border-box",
-  overflowX: "hidden",
-};
 
 const summaryGrid = {
   display: "grid",
