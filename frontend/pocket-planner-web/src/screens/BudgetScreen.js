@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import api from "../services/api";
 
@@ -13,6 +13,20 @@ const userId = user?.id;
     endDate: "",
     savingsGoal: ""   // Better to keep it inside budget
   });
+  const [budgetHistory, setBudgetHistory] = useState([]);
+
+const fetchBudgetHistory = async () => {
+  try {
+    const response = await api.get(`/budgets?userId=${userId}`);
+    setBudgetHistory(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+useEffect(() => {
+  fetchBudgetHistory();
+}, []);
   const calculateEndDate = (startDate, period) => {
   if (!startDate) return "";
 
@@ -51,7 +65,7 @@ const userId = user?.id;
 });
 
     alert("Budget saved successfully!");
-
+fetchBudgetHistory();
     setBudget({
     amount: "",
     period: "Monthly",
@@ -165,6 +179,39 @@ const userId = user?.id;
   </button>
 
 </form>
+               </div>
+
+        <div style={card}>
+          <h2>Previous Budget Details</h2>
+
+          {budgetHistory.length === 0 ? (
+            <p style={{ color: "#6B7280" }}>No previous budgets found.</p>
+          ) : (
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", minWidth: "500px", borderCollapse: "collapse" }}>
+                <thead>
+                  <tr style={{ background: "#EFF6FF" }}>
+                    <th style={tableHead}>Amount</th>
+                    <th style={tableHead}>Period</th>
+                    <th style={tableHead}>Start Date</th>
+                    <th style={tableHead}>End Date</th>
+                    <th style={tableHead}>Savings Goal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {budgetHistory.map((item) => (
+                    <tr key={item.id}>
+                      <td style={tableCell}>₹{item.amount}</td>
+                      <td style={tableCell}>{item.period}</td>
+                      <td style={tableCell}>{item.startDate}</td>
+                      <td style={tableCell}>{item.endDate}</td>
+                      <td style={tableCell}>₹{item.savingsGoal}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </main>
     </div>
@@ -172,7 +219,17 @@ const userId = user?.id;
 
 
 }
+const tableHead = {
+  padding: "12px",
+  textAlign: "left",
+  color: "#374151",
+};
 
+const tableCell = {
+  padding: "12px",
+  borderTop: "1px solid #E5E7EB",
+  color: "#4B5563",
+};
 const mainContent = {
   flex: 1,
   padding: "35px",
