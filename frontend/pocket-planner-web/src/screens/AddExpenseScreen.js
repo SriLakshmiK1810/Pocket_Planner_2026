@@ -17,19 +17,28 @@ const userId = user?.id;
     }
 
     try {
-  await api.post(`/expenses?userId=${userId}`, {
+  const payload = {
     title,
     amount: Number(amount),
     category,
     paymentMode,
     expenseType,
     date: new Date().toISOString().split("T")[0],
-  });
+  };
+
+  console.log("Saving expense:", { userId, payload });
+
+  await api.post(`/expenses?userId=${userId}`, payload);
 
   alert("Expense Added Successfully!");
+  setTitle("");
+  setAmount("");
+  setCategory("");
+  setPaymentMode("UPI");
+  setExpenseType("Need");
 } catch (error) {
-  console.error(error);
-  alert("Failed to save expense");
+  console.log("Save error:", error.response?.status, error.response?.data);
+  alert(error.response?.data?.message || JSON.stringify(error.response?.data) || "Failed to save expense");
 }
     setTitle("");
     setAmount("");
