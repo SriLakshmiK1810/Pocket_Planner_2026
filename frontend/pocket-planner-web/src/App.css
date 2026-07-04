@@ -25,22 +25,23 @@ body {
   width: 100%;
   box-sizing: border-box;
 }
+.page-content {
+  margin-left: 250px;
+  width: calc(100vw - 250px);
+  min-width: 0;
+  padding: 30px;
+  overflow-x: hidden;
+}
 
 @media (max-width: 768px) {
-  .sidebar {
-  display: none;
-}
-
-.page-content {
-  margin-left: 0;
-}
   .app-layout {
     display: block;
   }
 
   .page-content {
-    padding: 15px;
-    padding-top: 85px;
+    margin-left: 0;
+    width: 100%;
+    padding: 85px 15px 15px;
   }
 
   .page-card {
@@ -55,34 +56,6 @@ body {
     gap: 15px;
   }
 
-  h1 {
-    font-size: 28px;
-  }
-
-  h2 {
-    font-size: 22px;
-  }
-}
-.sidebar {
-  width: 250px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  overflow-y: auto;
-}
-.page-content {
-  margin-left: 250px;
-  width: calc(100% - 250px);
-  min-width: 0;
-  padding: 30px;
-}
-
-@media (max-width: 768px) {
-  .page-content {
-    margin-left: 0;
-    width: 100%;
-    padding: 15px;
-    padding-top: 85px;
-  }
+  h1 { font-size: 28px; }
+  h2 { font-size: 22px; }
 }
