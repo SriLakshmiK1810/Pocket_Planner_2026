@@ -26,6 +26,7 @@ const fetchBudgetHistory = async () => {
 
 useEffect(() => {
   fetchBudgetHistory();
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
   const calculateEndDate = (startDate, period) => {
   if (!startDate) return "";
