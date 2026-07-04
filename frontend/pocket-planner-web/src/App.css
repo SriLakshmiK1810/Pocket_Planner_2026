@@ -15,21 +15,11 @@ body {
 }
 
 .page-content {
+  margin-left: 250px;
   flex: 1;
   min-width: 0;
   padding: 30px;
 }
-
-.page-card {
-  width: 100%;
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 30px;
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
 .responsive-grid,
 .responsive-row {
   display: grid;
@@ -43,6 +33,13 @@ body {
 }
 
 @media (max-width: 768px) {
+  .sidebar {
+  display: none;
+}
+
+.page-content {
+  margin-left: 0;
+}
   .app-layout {
     display: block;
   }
@@ -71,4 +68,12 @@ body {
   h2 {
     font-size: 22px;
   }
+}
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
 }

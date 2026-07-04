@@ -45,9 +45,10 @@ function Sidebar() {
       )}
 
       <aside
+  className="sidebar"
   style={{
     ...sidebarStyle,
-    position: mobile ? "fixed" : "relative",
+    position: "fixed",
     top: mobile ? "60px" : "0",
     left: mobile ? (open ? "0" : "-270px") : "0",
     height: mobile ? "calc(100vh - 60px)" : "100vh",
