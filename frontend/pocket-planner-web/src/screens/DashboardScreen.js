@@ -59,19 +59,12 @@ const monthlyTotal = monthlyExpenses.reduce(
   0
 );
   return (
-  <div style={{ display: "flex", minHeight: "100vh" }}>
+  <div className="app-layout">
   <Sidebar />
 
-  <main
-    style={{
-      ...mainContent,
-     background: "#F8FAFC",
-color: "#111827",
-marginTop: isMobile ? "70px" : "0",
-padding: isMobile ? "15px" : "30px",
-      transition: "0.3s",
-    }}
-  >
+  <main className="page-content">
+    
+  
         <header style={{ marginBottom: "30px" }}>
           <h1
   style={{
