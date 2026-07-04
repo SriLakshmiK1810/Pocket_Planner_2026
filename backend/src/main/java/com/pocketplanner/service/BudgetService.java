@@ -27,6 +27,8 @@ public class BudgetService {
 public Budget getLatestBudget(Long userId) {
     return budgetRepository.findTopByUserIdOrderByIdDesc(userId);
 }
+@Autowired
+private ExpenseRepository expenseRepository;
 
 public List<BudgetReportDTO> getReports(Long userId) {
     List<Budget> budgets =
@@ -56,8 +58,10 @@ public List<BudgetReportDTO> getReports(Long userId) {
         ));
     }
     return reports;
+
 }
-@Autowired
-private ExpenseRepository expenseRepository;
+public List<Budget> getBudgetHistory(Long userId) {
+    return budgetRepository.findByUserIdOrderByIdDesc(userId);
+}
 
 }

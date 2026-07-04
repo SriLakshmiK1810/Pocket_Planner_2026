@@ -4,7 +4,7 @@ import com.pocketplanner.entity.Budget;
 import com.pocketplanner.service.BudgetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.List;
 @RestController
 @RequestMapping("/api/budgets")
 public class BudgetController {
@@ -19,7 +19,10 @@ public Budget saveBudget(
 ) {
     return budgetService.saveBudget(budget, userId);
 }
-
+@GetMapping
+public List<Budget> getBudgetHistory(@RequestParam Long userId) {
+    return budgetService.getBudgetHistory(userId);
+}
 @GetMapping("/latest")
 public Budget getLatestBudget(@RequestParam Long userId) {
     return budgetService.getLatestBudget(userId);
