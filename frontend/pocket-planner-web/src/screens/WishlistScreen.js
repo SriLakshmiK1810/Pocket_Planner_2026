@@ -48,10 +48,10 @@ const wishlistKey = `wishlist_${userId}`;
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div className="app-layout">
       <Sidebar />
 
-      <main style={mainContent}>
+      <main className="page-content" style={mainContent}>
         <div style={card}>
           <h1>⭐ Wishlist</h1>
 
@@ -91,7 +91,8 @@ const wishlistKey = `wishlist_${userId}`;
           {wishlist.length === 0 ? (
             <p>No items added.</p>
           ) : (
-            <table style={{ width: "100%" }}>
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", minWidth: "600px" }}>
               <thead>
                 <tr>
                   <th>Item</th>
@@ -123,6 +124,7 @@ const wishlistKey = `wishlist_${userId}`;
                 ))}
               </tbody>
             </table>
+            </div>
           )}
         </div>
 

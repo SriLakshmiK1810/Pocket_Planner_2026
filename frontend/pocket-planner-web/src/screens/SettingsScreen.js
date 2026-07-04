@@ -18,17 +18,10 @@ const [currency, setCurrency] = useState(
 };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className="app-layout">
       <Sidebar />
 
-      <div
-  style={{
-  ...mainContent,
-  background: "#F8FAFC",
-  color: "#111827",
-}}
->
-
+      <main className="page-content" style={mainContent}>
         <h1>Settings</h1>
 
         <div
@@ -96,7 +89,8 @@ const [currency, setCurrency] = useState(
 
         </div>
 
-      </div>
+      
+      </main>
     </div>
   );
 }

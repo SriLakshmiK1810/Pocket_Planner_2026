@@ -72,22 +72,23 @@ const totalSpent = expenses.reduce(
 );
 
 const remaining = budget - totalSpent;
-  return (
-    
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-    <Sidebar />
 
-    <main style={mainContent}>
+return (
+  <div className="app-layout">
+  <Sidebar />
+  <main className="page-content" style={mainContent}>
 
       {/* Header */}
       <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "25px",
-        }}
-      >
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: "15px",
+    marginBottom: "25px",
+  }}
+>
   <h1 style={{ margin: 0, color: "#111827" }}>
     Expense List
   </h1>
@@ -228,7 +229,7 @@ const remaining = budget - totalSpent;
         )}
       </main>
     </div>
-  );
+);
 }
 
 const mainContent = {
@@ -300,7 +301,8 @@ const deleteBtn = {
 // };
 const summaryCard = {
   display: "flex",
-  gap: "30px",
+  flexWrap: "wrap",
+  gap: "15px",
   background: "#FFFFFF",
   padding: "15px 25px",
   borderRadius: "15px",

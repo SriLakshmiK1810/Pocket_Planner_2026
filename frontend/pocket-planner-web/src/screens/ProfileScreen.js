@@ -48,16 +48,16 @@ const handleSave = async () => {
 
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className="app-layout">
       <Sidebar />
 
-      <div
+      <main className="page-content">
         style={{
           flex: 1,
           padding: "35px",
           background: "#F8FAFC",
         }}
-      >
+      
         <h1>My Profile</h1>
 
         <div
@@ -190,7 +190,7 @@ const handleSave = async () => {
           🚪 Logout
         </button>
 
-      </div>
+      </main>
     </div>
   );
 }
@@ -234,7 +234,8 @@ const deleteButton = {
 
 const logoutButton = {
   marginTop: "25px",
-  width: "600px",
+  width: "100%",
+maxWidth: "600px",
   padding: "15px",
   background: "#EF4444",
   color: "#fff",

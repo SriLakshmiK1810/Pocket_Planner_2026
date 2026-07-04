@@ -72,10 +72,10 @@ const handleSave = async () => {
 }
 };
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <Sidebar />
+    <div className="app-layout">
+        <Sidebar />
 
-      <main style={mainContent}>
+      <main className="page-content" style={mainContent}>
         <div style={card}>
           <h1>📷 Scan Bill</h1>
 

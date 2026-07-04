@@ -89,7 +89,7 @@ const container = {
 };
 
 const title = {
-  fontSize: "48px",
+  fontSize: "clamp(32px, 8vw, 48px)",
   color: "#2563EB",
   marginBottom: "10px",
 };
@@ -106,6 +106,8 @@ const description = {
 };
 
 const featureBox = {
+  width: "100%",
+  maxWidth: "500px",
   padding: "20px",
   borderRadius: "15px",
   boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
@@ -113,7 +115,7 @@ const featureBox = {
   lineHeight: "2",
 };
 const primaryButton = {
-  width: "250px",
+  width: "min(250px, 100%)",
   padding: "14px",
   background: "#2563EB",
   color: "white",
@@ -125,7 +127,7 @@ const primaryButton = {
 };
 
 const secondaryButton = {
-  width: "250px",
+  width: "min(250px, 100%)",
   padding: "14px",
   background: "white",
   color: "#2563EB",
