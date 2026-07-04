@@ -10,42 +10,61 @@ function AddExpenseScreen() {
 const [expenseType, setExpenseType] = useState("Need");
  const user = JSON.parse(localStorage.getItem("user"));
 const userId = user?.id;
-  const handleSaveExpense = async () => {
-    if (!title || !amount || !category) {
-      alert("Please fill all fields");
-      return;
+const handleSaveExpense = async () => {
+  if (!title || !amount || !category) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  const newAmount = Number(amount);
+
+  try {
+    const [budgetRes, expensesRes] = await Promise.all([
+      api.get(`/budgets/latest?userId=${userId}`),
+      api.get(`/expenses?userId=${userId}`),
+    ]);
+
+    const budget = Number(budgetRes.data?.amount || 0);
+    const spent = expensesRes.data.reduce(
+      (sum, expense) => sum + Number(expense.amount),
+      0
+    );
+
+    const newTotal = spent + newAmount;
+    let message = "";
+
+    if (budget > 0 && newTotal > budget) {
+      message = `This expense will exceed your budget by ₹${newTotal - budget}. Do you still want to add it?`;
+    } else if (budget > 0 && newTotal >= budget * 0.7) {
+      message = `After adding this expense, you will use ${Math.round(
+        (newTotal / budget) * 100
+      )}% of your budget. This may reduce your savings. Continue?`;
+    } else if (expenseType === "Want") {
+      message = `This is marked as a Want expense. It may reduce your savings. Do you want to continue?`;
     }
 
-    try {
-  const payload = {
-    title,
-    amount: Number(amount),
-    category,
-    paymentMode,
-    expenseType,
-    date: new Date().toISOString().split("T")[0],
-  };
+    if (message && !window.confirm(message)) return;
 
-  console.log("Saving expense:", { userId, payload });
+    await api.post(`/expenses?userId=${userId}`, {
+      title,
+      amount: newAmount,
+      category,
+      paymentMode,
+      expenseType,
+      date: new Date().toISOString().split("T")[0],
+    });
 
-  await api.post(`/expenses?userId=${userId}`, payload);
-
-  alert("Expense Added Successfully!");
-  setTitle("");
-  setAmount("");
-  setCategory("");
-  setPaymentMode("UPI");
-  setExpenseType("Need");
-} catch (error) {
-  console.log("Save error:", error.response?.status, error.response?.data);
-  alert(error.response?.data?.message || JSON.stringify(error.response?.data) || "Failed to save expense");
-}
+    alert("Expense Added Successfully!");
     setTitle("");
     setAmount("");
     setCategory("");
     setPaymentMode("UPI");
-setExpenseType("Need");
-  };
+    setExpenseType("Need");
+  } catch (error) {
+    console.error(error);
+    alert("Failed to save expense");
+  }
+};
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
