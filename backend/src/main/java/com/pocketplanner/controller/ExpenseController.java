@@ -20,10 +20,12 @@ public class ExpenseController {
     private ExpenseService expenseService;
 
     @PostMapping
-    public Expense addExpense(@RequestBody Expense expense) {
-        return expenseService.addExpense(expense);
-    }
-
+public Expense addExpense(
+        @RequestParam Long userId,
+        @RequestBody Expense expense
+) {
+    return expenseService.addExpense(expense, userId);
+}
    @GetMapping
 public List<Expense> getAllExpenses(@RequestParam Long userId) {
     return expenseService.getAllExpenses(userId);

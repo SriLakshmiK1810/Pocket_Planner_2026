@@ -2,6 +2,8 @@ package com.pocketplanner.service;
 
 import com.pocketplanner.entity.Expense;
 import com.pocketplanner.repository.ExpenseRepository;
+import com.pocketplanner.repository.UserRepository;
+import com.pocketplanner.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,9 +22,17 @@ private OCRService ocrService;
     @Autowired
     private ExpenseRepository expenseRepository;
 
-    public Expense addExpense(Expense expense) {
-        return expenseRepository.save(expense);
-    }
+    
+    @Autowired
+private UserRepository userRepository;
+
+public Expense addExpense(Expense expense, Long userId) {
+    User user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+    expense.setUser(user);
+    return expenseRepository.save(expense);
+}
 
     public List<Expense> getAllExpenses(Long userId) {
     return expenseRepository.findByUserId(userId);
