@@ -33,15 +33,7 @@ const handleScan = async () => {
   formData.append("file", image);
 
   try {
-    const response = await api.post(
-      "/expenses/scan",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    const response = await api.post("/expenses/scan", formData);
 
    setExpenseData(prev => ({
   ...prev,
@@ -49,9 +41,9 @@ const handleScan = async () => {
 }));
 
   } catch (error) {
-    console.error(error);
-    alert("Scanning failed");
-  }
+  console.error("Scan error:", error.response?.data || error.message);
+  alert(error.response?.data?.message || "Scanning failed");
+}
 };
 const handleSave = async () => {
   try {
