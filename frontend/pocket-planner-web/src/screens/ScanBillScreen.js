@@ -23,7 +23,31 @@ useEffect(() => {
 }, []);
 const user = JSON.parse(localStorage.getItem("user"));
 const userId = user?.id;
+const compressImage = (file) =>
+  new Promise((resolve) => {
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+
+    img.onload = () => {
+      const maxWidth = 1600;
+      const scale = Math.min(1, maxWidth / img.width);
+
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+
+      canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      canvas.toBlob(
+        (blob) => resolve(new File([blob], "bill.jpg", { type: "image/jpeg" })),
+        "image/jpeg",
+        0.7
+      );
+    };
+  });
+
 const handleScan = async () => {
+  
   if (!image) {
     alert("Capture a bill first");
     return;
@@ -45,6 +69,7 @@ const handleScan = async () => {
   alert(error.response?.data?.message || "Scanning failed");
 }
 };
+
 const handleSave = async () => {
   try {
     console.log(expenseData);
@@ -90,14 +115,15 @@ const handleSave = async () => {
   type="file"
   accept="image/*"
   capture="environment"
-  onChange={(e) => {
-    const file = e.target.files[0];
+  onChange={async (e) => {
+  const file = e.target.files[0];
 
-    if (file) {
-      setImage(file);
-      setPreview(URL.createObjectURL(file));
-    }
-  }}
+  if (file) {
+    const compressedFile = await compressImage(file);
+    setImage(compressedFile);
+    setPreview(URL.createObjectURL(compressedFile));
+  }
+}}
   className="bill-file-input"
 />
 
