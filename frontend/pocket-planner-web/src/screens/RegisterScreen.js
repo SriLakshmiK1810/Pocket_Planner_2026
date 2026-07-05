@@ -24,13 +24,13 @@ alert("Registration Successful!");
 navigate("/dashboard");
 
   } catch (error) {
-    console.log("ERROR:", error);
-    console.log("MESSAGE:", error.message);
-    console.log("RESPONSE:", error.response);
-    console.log("DATA:", error.response?.data);
+  const message =
+    error.response?.data?.message ||
+    error.response?.data ||
+    "Registration failed";
 
-    alert(error.message);
-  }
+  alert(message);
+}
 };
   
  return (
