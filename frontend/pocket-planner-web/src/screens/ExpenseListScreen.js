@@ -232,12 +232,7 @@ return (
 );
 }
 
-const mainContent = {
-  flex: 1,
-  padding: "35px",
-  background: "#F8FAFC",
-  minWidth: 0,
-};
+
 
 const tableCard = {
   background: "#fff",

@@ -172,11 +172,7 @@ const handleSaveExpense = async () => {
   );
 }
 
-const mainContent = {
-  flex: 1,
-  padding: "35px",
-  background: "#F8FAFC",
-};
+
 
 const formCard = {
   maxWidth: "650px",
