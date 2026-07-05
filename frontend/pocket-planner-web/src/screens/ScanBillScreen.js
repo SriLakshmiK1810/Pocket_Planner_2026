@@ -1,6 +1,7 @@
 import Sidebar from "../components/Sidebar";
 import api from "../services/api";
 import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 function ScanBillScreen() {
     const [image, setImage] = useState(null);
 const [preview, setPreview] = useState(null);
@@ -12,6 +13,15 @@ const [expenseData, setExpenseData] = useState({
   paymentMode: "UPI",
   expenseType: "Need",
 });
+const fileInputRef = useRef(null);
+
+useEffect(() => {
+  const isMobile = window.innerWidth <= 768;
+
+  if (isMobile) {
+    fileInputRef.current?.click();
+  }
+}, []);
 const user = JSON.parse(localStorage.getItem("user"));
 const userId = user?.id;
 const handleScan = async () => {
@@ -83,14 +93,9 @@ const handleSave = async () => {
             Upload or capture your bill. The app will automatically extract:
           </p>
 
-          <ul>
-            <li>💰 Amount</li>
-            <li>🏷 Category</li>
-            <li>📅 Date</li>
-            <li>🏪 Merchant Name</li>
-          </ul>
-
+        
           <input
+  ref={fileInputRef}
   type="file"
   accept="image/*"
   capture="environment"
@@ -102,7 +107,9 @@ const handleSave = async () => {
       setPreview(URL.createObjectURL(file));
     }
   }}
+  className="bill-file-input"
 />
+
 {preview && (
   <img
     src={preview}
@@ -290,5 +297,6 @@ const saveButton = {
   cursor: "pointer",
   marginTop: "15px",
 };
+
 
 export default ScanBillScreen;
