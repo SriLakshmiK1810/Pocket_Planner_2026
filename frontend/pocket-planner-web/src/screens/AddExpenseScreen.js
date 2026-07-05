@@ -67,11 +67,11 @@ const handleSaveExpense = async () => {
 };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <Sidebar />
+    <div className="app-layout">
+    <Sidebar />
 
-      <main style={mainContent}>
-        <div style={formCard}>
+    <main className="page-content">
+      <div style={formCard}>
           <h1 style={{ margin: "0 0 25px", color: "#111827" }}>
             Add New Expense
           </h1>

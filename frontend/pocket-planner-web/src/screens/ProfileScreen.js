@@ -49,18 +49,13 @@ const handleSave = async () => {
 
   return (
     <div className="app-layout">
-      <Sidebar />
+  <Sidebar />
 
-      <main className="page-content">
-        style={{
-          flex: 1,
-          padding: "35px",
-          background: "#F8FAFC",
-        }}
-      
-        <h1>My Profile</h1>
+  <main className="page-content">
+    <h1>My Profile</h1>
+    <div className="page-card">
 
-        <div
+        {/* <div
           style={{
             background: "#fff",
             padding: "30px",
@@ -69,7 +64,7 @@ const handleSave = async () => {
             boxShadow:
               "0 4px 20px rgba(0,0,0,0.05)",
           }}
-        >
+        > */}
           <label>Full Name</label>
 
           <input
@@ -121,7 +116,8 @@ const handleSave = async () => {
                 </div>
 
         {/* Account Details */}
-        <div
+        <div className="page-card">
+        {/* <div
           style={{
             background: "#fff",
             padding: "30px",
@@ -130,7 +126,7 @@ const handleSave = async () => {
             marginTop: "25px",
             boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
           }}
-        >
+        > */}
           <h2>Account Details</h2>
 
           <p><strong>Account ID:</strong> {JSON.parse(localStorage.getItem("user"))?.id}</p>
@@ -143,7 +139,8 @@ const handleSave = async () => {
         </div>
 
         {/* Manage Account */}
-        <div
+        <div className="page-card">
+        {/* <div
           style={{
             background: "#fff",
             padding: "30px",
@@ -152,7 +149,7 @@ const handleSave = async () => {
             marginTop: "25px",
             boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
           }}
-        >
+        > */}
           <h2>Manage Account</h2>
 
           <button

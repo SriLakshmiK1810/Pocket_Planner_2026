@@ -21,18 +21,10 @@ const [currency, setCurrency] = useState(
     <div className="app-layout">
       <Sidebar />
 
-      <main className="page-content" style={mainContent}>
+      <main className="page-content" >
         <h1>Settings</h1>
 
-        <div
-  style={{
-    ...card,
-    background: "#FFFFFF",
-  color: "#111827",
-  }}
->
-
-          
+        <div className="page-card">        
 
           <h2>Notifications</h2>
 
@@ -95,19 +87,19 @@ const [currency, setCurrency] = useState(
   );
 }
 
-const mainContent = {
-  flex: 1,
-  padding: "35px",
-  background: "#F8FAFC",
-};
+// const mainContent = {
+//   flex: 1,
+//   padding: "35px",
+//   background: "#F8FAFC",
+// };
 
-const card = {
-  maxWidth: "700px",
-  background: "#fff",
-  padding: "35px",
-  borderRadius: "20px",
-  boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-};
+// const card = {
+//   maxWidth: "700px",
+//   background: "#fff",
+//   padding: "35px",
+//   borderRadius: "20px",
+//   boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+// };
 
 const row = {
   display: "flex",

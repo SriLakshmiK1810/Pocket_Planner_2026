@@ -76,7 +76,7 @@ const remaining = budget - totalSpent;
 return (
   <div className="app-layout">
   <Sidebar />
-  <main className="page-content" style={mainContent}>
+  <main className="page-content" >
 
       {/* Header */}
       <div

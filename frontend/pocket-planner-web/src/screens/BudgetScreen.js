@@ -84,11 +84,11 @@ fetchBudgetHistory();
 };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <Sidebar />
+    <div className="app-layout">
+    <Sidebar />
 
-      <main style={mainContent}>
-        <div style={card}>
+    <main className="page-content">
+      <div className="page-card">
           <h1>💰 Set Budget</h1>
 
           <form onSubmit={handleSubmit} style={formStyle}>
@@ -182,7 +182,7 @@ fetchBudgetHistory();
 </form>
                </div>
 
-        <div style={card}>
+        <div className="page-card">
           <h2>Previous Budget Details</h2>
 
           {budgetHistory.length === 0 ? (
@@ -231,11 +231,11 @@ const tableCell = {
   borderTop: "1px solid #E5E7EB",
   color: "#4B5563",
 };
-const mainContent = {
-  flex: 1,
-  padding: "35px",
-  background: "#F8FAFC",
-};
+// const mainContent = {
+//   flex: 1,
+//   padding: "35px",
+//   background: "#F8FAFC",
+// };
 
 const formStyle = {
   display: "flex",
@@ -270,14 +270,14 @@ const input = {
   boxSizing: "border-box",
 };
 
-const card = {
-  maxWidth: "650px",
-  margin: "40px auto",
-  background: "#fff",
-  padding: "35px",
-  borderRadius: "20px",
-  boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
-};
+// const card = {
+//   maxWidth: "650px",
+//   margin: "40px auto",
+//   background: "#fff",
+//   padding: "35px",
+//   borderRadius: "20px",
+//   boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
+// };
 
 const buttonStyle = {
   marginTop: "10px",

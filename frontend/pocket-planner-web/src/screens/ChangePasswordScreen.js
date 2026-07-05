@@ -51,11 +51,11 @@ navigate("/login");
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <Sidebar />
+    <div className="app-layout">
+        <Sidebar />
 
-      <div style={mainContent}>
-        <div style={card}>
+      <main className="page-content">
+        <div className="page-card">
           <h1>🔒 Change Password</h1>
 
           <label>Current Password</label>
@@ -105,25 +105,25 @@ navigate("/login");
             Cancel
           </button>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
 
-const mainContent = {
-  flex: 1,
-  padding: "35px",
-  background: "#F8FAFC",
-};
+// const mainContent = {
+//   flex: 1,
+//   padding: "35px",
+//   background: "#F8FAFC",
+// };
 
-const card = {
-  maxWidth: "550px",
-  margin: "40px auto",
-  background: "#fff",
-  padding: "35px",
-  borderRadius: "20px",
-  boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-};
+// const card = {
+//   maxWidth: "550px",
+//   margin: "40px auto",
+//   background: "#fff",
+//   padding: "35px",
+//   borderRadius: "20px",
+//   boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+// };
 
 const inputStyle = {
   width: "100%",

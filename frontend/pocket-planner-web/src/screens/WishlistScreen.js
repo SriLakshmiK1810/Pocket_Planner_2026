@@ -51,8 +51,8 @@ const wishlistKey = `wishlist_${userId}`;
     <div className="app-layout">
       <Sidebar />
 
-      <main className="page-content" style={mainContent}>
-        <div style={card}>
+      <main className="page-content">
+          <div className="page-card">
           <h1>⭐ Wishlist</h1>
 
           <input
@@ -84,8 +84,7 @@ const wishlistKey = `wishlist_${userId}`;
             Add to Wishlist
           </button>
         </div>
-
-        <div style={card}>
+<div className="page-card">
           <h2>My Wishlist</h2>
 
           {wishlist.length === 0 ? (
@@ -128,7 +127,7 @@ const wishlistKey = `wishlist_${userId}`;
           )}
         </div>
 
-        <div style={card}>
+        <div className="page-card">
           <h2>💡 Think Before You Buy</h2>
 
           <ul>
@@ -142,19 +141,6 @@ const wishlistKey = `wishlist_${userId}`;
   );
 }
 
-const mainContent = {
-  flex: 1,
-  padding: "35px",
-  background: "#F8FAFC",
-};
-
-const card = {
-  background: "#fff",
-  padding: "25px",
-  borderRadius: "15px",
-  marginBottom: "25px",
-  boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
-};
 
 const inputStyle = {
   width: "100%",

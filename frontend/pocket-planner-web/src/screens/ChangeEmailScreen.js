@@ -41,11 +41,11 @@ function ChangeEmailScreen() {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div className="app-layout">
       <Sidebar />
-
-      <div style={mainContent}>
-        <div style={card}>
+      <main className="page-content">
+        <div className="page-card">
+        
           <h1>Change Email</h1>
 
           <label>New Email</label>
@@ -80,25 +80,21 @@ function ChangeEmailScreen() {
             Cancel
           </button>
         </div>
+        </main>
       </div>
-    </div>
+    
   );
 }
 
-const mainContent = {
-  flex: 1,
-  padding: "35px",
-  background: "#F8FAFC",
-};
 
-const card = {
-  maxWidth: "550px",
-  margin: "40px auto",
-  background: "#fff",
-  padding: "35px",
-  borderRadius: "20px",
-  boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-};
+// const card = {
+//   maxWidth: "550px",
+//   margin: "40px auto",
+//   background: "#fff",
+//   padding: "35px",
+//   borderRadius: "20px",
+//   boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+// };
 
 const inputStyle = {
   width: "100%",
