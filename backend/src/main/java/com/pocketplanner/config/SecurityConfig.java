@@ -25,6 +25,7 @@ public CorsConfigurationSource corsConfigurationSource() {
     configuration.addAllowedOrigin("http://localhost:3000");
     configuration.addAllowedOrigin("https://backup-git-main-srilakshmik1810s-projects.vercel.app");
 configuration.addAllowedOrigin("https://backup-r32b36iqm-srilakshmik1810s-projects.vercel.app");
+configuration.addAllowedOriginPattern("https://*.vercel.app");
     configuration.addAllowedHeader("*");
     configuration.addAllowedMethod("*");
     configuration.setAllowCredentials(true);
