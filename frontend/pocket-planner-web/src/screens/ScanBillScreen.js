@@ -1,6 +1,5 @@
 import Sidebar from "../components/Sidebar";
 import api from "../services/api";
-import { useState } from "react";
 import { useState, useEffect, useRef } from "react";
 function ScanBillScreen() {
     const [image, setImage] = useState(null);
