@@ -189,12 +189,25 @@ const handleSave = async () => {
           setExpenseData({ ...expenseData, category: e.target.value })
         }
       >
-        <option>Food</option>
-        <option>Shopping</option>
-        <option>Medical</option>
-        <option>Travel</option>
-        <option>Bills</option>
-        <option>Others</option>
+        <option value="">Select Category</option>
+<option value="Groceries">Groceries</option>
+<option value="Vegetables">Vegetables</option>
+<option value="Fruits">Fruits</option>
+<option value="Milk">Milk & Dairy</option>
+<option value="Snacks">Snacks</option>
+<option value="Food">Food & Dining</option>
+<option value="Travel">Travel</option>
+<option value="Transport">Transport</option>
+<option value="Bills">Bills & Utilities</option>
+<option value="Medical">Medical</option>
+<option value="Education"> Education</option>
+<option value="Shopping">Shopping</option>
+<option value="Clothing">Clothing</option>
+<option value="Electronics">Electronics</option>
+<option value="Repair">Repair & Maintenance</option>
+<option value="EMI">EMI & Loans</option>
+<option value="Festival">Festivals & Gifts</option>
+<option value="Others">Others</option>
       </select>
     </div>
 

@@ -58,6 +58,21 @@ const monthlyTotal = monthlyExpenses.reduce(
   (sum, expense) => sum + Number(expense.amount),
   0
 );
+const categoryTotals = allExpenses.reduce((totals, expense) => {
+  const category = expense.category || "Others";
+  totals[category] = (totals[category] || 0) + Number(expense.amount);
+  return totals;
+}, {});
+
+const totalSpent = Object.values(categoryTotals).reduce(
+  (sum, amount) => sum + amount,
+  0
+);
+
+const getPercentage = (category) =>
+  totalSpent > 0
+    ? Math.round(((categoryTotals[category] || 0) / totalSpent) * 100)
+    : 0;
   return (
   <div className="app-layout">
   <Sidebar />
@@ -351,9 +366,11 @@ const monthlyTotal = monthlyExpenses.reduce(
 >
   Quick Stats
 </h2>
-              <p>Food: 35%</p>
-              <p>Travel: 25%</p>
-              <p style={{ marginBottom: 0 }}>Shopping: 40%</p>
+              <p>Food: {getPercentage("Food")}%</p>
+<p>Travel: {getPercentage("Travel")}%</p>
+<p style={{ marginBottom: 0 }}>
+  Shopping: {getPercentage("Shopping")}%
+</p>
             </section>
             <section
   style={{
