@@ -43,6 +43,39 @@ setRecentExpenses(expenseResponse.data.slice(-5).reverse());
     console.log(error);
   }
 };
+const recentActivities = [
+  ...recentExpenses.map((expense) => ({
+    id: `expense-${expense.id}`,
+    text: `${expense.category} - ${expense.title} added`,
+    icon:
+      expense.category === "Food"
+        ? "🍔"
+        : expense.category === "Travel"
+        ? "🚕"
+        : expense.category === "Shopping"
+        ? "🛍️"
+        : expense.category === "Medical"
+        ? "🏥"
+        : expense.category === "Education"
+        ? "📚"
+        : "💸",
+    date: expense.date,
+  })),
+];
+
+if (latestBudget) {
+  recentActivities.push({
+    id: "budget",
+    text: `Budget set to ₹${latestBudget.amount}`,
+    icon: "💰",
+    date: latestBudget.createdAt || new Date().toISOString(),
+  });
+}
+
+recentActivities.sort(
+  (a, b) => new Date(b.date) - new Date(a.date)
+);
+
 const currentMonth = new Date().getMonth();
 const currentYear = new Date().getFullYear();
 
@@ -348,6 +381,7 @@ const getPercentage = (category) =>
                 />
               ))
             )}
+            
           </section>
 
           <div style={{ display: "grid", gap: "20px" }}>
@@ -387,9 +421,15 @@ const getPercentage = (category) =>
 >
   Recent Activity
 </h2>
-              <p>🍔 Food Expense Added</p>
-              <p>🚕 Travel Expense Added</p>
-              <p style={{ marginBottom: 0 }}>💰 Budget Updated</p>
+              {recentActivities.length === 0 ? (
+  <p>No recent activity</p>
+) : (
+  recentActivities.slice(0, 5).map((activity) => (
+    <p key={activity.id}>
+      {activity.icon} {activity.text}
+    </p>
+  ))
+)}
             </section>
           </div>
         </div>
