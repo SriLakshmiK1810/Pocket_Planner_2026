@@ -32,16 +32,22 @@ const handleSave = async () => {
       dateOfBirth,
     };
 
-    const response = await api.put(
-      `/users/${user.id}`,
-      updatedUser
-    );
+    console.log("Sending:", updatedUser);
+
+    const response = await api.put(`/users/${user.id}`, updatedUser);
+
+    console.log("Response:", response.data);
 
     localStorage.setItem("user", JSON.stringify(response.data));
 
+    setName(response.data.name);
+    setEmail(response.data.email);
+    setPhoneNumber(response.data.phoneNumber || "");
+    setDateOfBirth(response.data.dateOfBirth || "");
+
     alert("Profile Updated Successfully!");
   } catch (error) {
-    console.log(error);
+    console.log("Error:", error.response?.data || error);
     alert("Failed to update profile");
   }
 };
