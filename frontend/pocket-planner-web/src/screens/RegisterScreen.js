@@ -10,8 +10,7 @@ function RegisterScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [popupMessage, setPopupMessage] = useState("");
-
+  
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);

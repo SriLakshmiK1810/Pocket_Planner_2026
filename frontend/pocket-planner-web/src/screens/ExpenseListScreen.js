@@ -225,9 +225,8 @@ return (
     style={{
       padding: "8px 14px",
 fontSize: "15px",
-fontWeight: "700",
 borderRadius: "20px",
-      borderRadius: "15px",
+      
       color: "#fff",
       backgroundColor:
         expense.expenseType === "Need"
