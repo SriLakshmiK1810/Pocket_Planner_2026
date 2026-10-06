@@ -297,13 +297,6 @@ feature: {
     gap: "12px",
     marginBottom: "18px",
   },
-headerBlock: {
-  width: "100%",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center", // centers logo and heading together
-  marginBottom: "18px",
-},
 
   socialButton: {
     flex: 1,
