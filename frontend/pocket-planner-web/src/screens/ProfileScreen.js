@@ -57,195 +57,272 @@ const handleSave = async () => {
     <div className="app-layout">
   <Sidebar />
 
-  <main className="page-content">
-    <h1>My Profile</h1>
-    <div className="page-card">
+ <main
+  className="page-content"
+  style={{
+    background: "#F4F7F2",
+    minHeight: "100vh",
+    padding: "35px",
+    fontFamily: "Poppins, sans-serif",
+  }}
+>
+  <div style={profileContainer}>
+    <h1 style={pageTitle}>👤 My Profile</h1>
 
-        {/* <div
-          style={{
-            background: "#fff",
-            padding: "30px",
-            borderRadius: "20px",
-            maxWidth: "600px",
-            boxShadow:
-              "0 4px 20px rgba(0,0,0,0.05)",
-          }}
-        > */}
-          <label>Full Name</label>
+    <p style={pageSubtitle}>
+      View and manage your personal account information.
+    </p>
 
+    {/* Personal Information */}
+    <div style={profileCard}>
+      <h2 style={sectionTitle}>Personal Information</h2>
+
+      <div style={formGrid}>
+        <div>
+          <label style={label}>Full Name</label>
           <input
             type="text"
             value={name}
-            onChange={(e) =>
-              setName(e.target.value)
-            }
+            onChange={(e) => setName(e.target.value)}
             style={inputStyle}
           />
+        </div>
 
-          <label>Email</label>
-
+        <div>
+          <label style={label}>Email</label>
           <input
             type="email"
             value={email}
-            onChange={(e) =>
-              setEmail(e.target.value)
-            }
+            onChange={(e) => setEmail(e.target.value)}
             style={inputStyle}
           />
-          <label>Phone Number</label>
-
-<input
-  type="tel"
-  value={phoneNumber}
-  onChange={(e) => setPhoneNumber(e.target.value)}
-  style={inputStyle}
-  placeholder="Enter phone number"
-/>
-
-<label>Date of Birth</label>
-
-<input
-  type="date"
-  value={dateOfBirth}
-  onChange={(e) => setDateOfBirth(e.target.value)}
-  style={inputStyle}
-/>
-
-
-
-          <button
-            onClick={handleSave}
-            style={buttonStyle}
-          >
-            Save Changes
-          </button>
-                </div>
-
-        {/* Account Details */}
-        <div className="page-card">
-        {/* <div
-          style={{
-            background: "#fff",
-            padding: "30px",
-            borderRadius: "20px",
-            maxWidth: "600px",
-            marginTop: "25px",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
-          }}
-        > */}
-          <h2>Account Details</h2>
-
-          <p><strong>Account ID:</strong> {JSON.parse(localStorage.getItem("user"))?.id}</p>
-
-          <p><strong>Account Type:</strong> USER</p>
-
-          <p><strong>Email:</strong> {email}</p>
-
-          <p><strong>Savings Goal:</strong> ₹{JSON.parse(localStorage.getItem("user"))?.savingsGoal || 0}</p>
         </div>
 
-        {/* Manage Account */}
-        <div className="page-card">
-        {/* <div
-          style={{
-            background: "#fff",
-            padding: "30px",
-            borderRadius: "20px",
-            maxWidth: "600px",
-            marginTop: "25px",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
-          }}
-        > */}
-          <h2>Manage Account</h2>
-
-          <button
-    style={actionButton}
-    onClick={() => navigate("/change-password")}
->
-    🔒 Change Password
-</button>
-
-          <button
-    style={actionButton}
-    onClick={() => navigate("/change-email")}
->
-    📧 Change Email
-</button>
-
-          <button style={actionButton}>
-            Export My Data
-          </button>
-
-          <button style={deleteButton}
-            onClick={() => navigate("/delete-account")}
-            > Delete Account
-</button>
+        <div>
+          <label style={label}>Phone Number</label>
+          <input
+            type="tel"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            placeholder="Enter phone number"
+            style={inputStyle}
+          />
         </div>
 
-        {/* Logout */}
+        <div>
+          <label style={label}>Date of Birth</label>
+          <input
+            type="date"
+            value={dateOfBirth}
+            onChange={(e) => setDateOfBirth(e.target.value)}
+            style={inputStyle}
+          />
+        </div>
+      </div>
+
+      <button onClick={handleSave} style={buttonStyle}>
+        Save Changes
+      </button>
+    </div>
+
+    {/* Account Details */}
+    <div style={profileCard}>
+      <h2 style={sectionTitle}>Account Details</h2>
+
+      <div style={detailsGrid}>
+        <div>
+          <span style={detailLabel}>Account ID</span>
+          <p>{JSON.parse(localStorage.getItem("user"))?.id}</p>
+        </div>
+
+        <div>
+          <span style={detailLabel}>Account Type</span>
+          <p>USER</p>
+        </div>
+
+        <div>
+          <span style={detailLabel}>Email</span>
+          <p>{email}</p>
+        </div>
+
+        <div>
+          <span style={detailLabel}>Savings Goal</span>
+          <p>
+            ₹{JSON.parse(localStorage.getItem("user"))?.savingsGoal || 0}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Manage Account */}
+    <div style={profileCard}>
+      <h2 style={sectionTitle}>Manage Account</h2>
+
+      <div style={buttonGrid}>
         <button
-          style={logoutButton}
-          onClick={() => {
-            localStorage.clear();
-            window.location.href = "/login";
-          }}
+          style={actionButton}
+          onClick={() => navigate("/change-password")}
         >
-          🚪 Logout
+          🔒 Change Password
         </button>
 
-      </main>
+        <button
+          style={actionButton}
+          onClick={() => navigate("/change-email")}
+        >
+          📧 Change Email
+        </button>
+
+        <button style={actionButton}>
+          📥 Export My Data
+        </button>
+
+        <button
+          style={deleteButton}
+          onClick={() => navigate("/delete-account")}
+        >
+          🗑 Delete Account
+        </button>
+      </div>
+    </div>
+
+    <button
+      style={logoutButton}
+      onClick={() => {
+        localStorage.clear();
+        window.location.href = "/login";
+      }}
+    >
+      🚪 Logout
+    </button>
+  </div>
+</main>
     </div>
   );
 }
 
+
+const profileCard = {
+  background: "#FFFFFF",
+  padding: "30px",
+  borderRadius: "22px",
+  border: "1px solid #E5E7EB",
+  boxShadow: "0 16px 36px rgba(15,23,42,.08)",
+  marginBottom: "25px",
+};
+
+const logoutButton = {
+  marginTop: "30px",
+  width: "100%",
+  maxWidth: "750px",
+  padding: "16px",
+  background: "#EF4444",
+  color: "#FFFFFF",
+  border: "none",
+  borderRadius: "999px",
+  fontSize: "17px",
+  fontWeight: "700",
+  cursor: "pointer",
+  boxShadow: "0 12px 28px rgba(239,68,68,.25)",
+};
+
+const profileContainer = {
+  maxWidth: "900px",
+  margin: "0 auto",
+};
+
+const pageTitle = {
+  color: "#14532D",
+  fontSize: "42px",
+  fontWeight: "700",
+  marginBottom: "8px",
+};
+
+const pageSubtitle = {
+  color: "#64748B",
+  fontSize: "17px",
+  marginBottom: "30px",
+};
+
+const sectionTitle = {
+  color: "#15803D",
+  fontSize: "24px",
+  fontWeight: "700",
+  marginBottom: "22px",
+};
+
+const formGrid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
+  gap: "22px",
+};
+
+const detailsGrid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+  gap: "20px",
+};
+
+const detailLabel = {
+  display: "block",
+  color: "#64748B",
+  fontWeight: "600",
+  marginBottom: "6px",
+};
+
+const label = {
+  display: "block",
+  marginBottom: "8px",
+  color: "#14532D",
+  fontWeight: "600",
+};
+
 const inputStyle = {
   width: "100%",
   padding: "14px",
-  marginTop: "8px",
-  marginBottom: "20px",
-  borderRadius: "10px",
-  border: "1px solid #E5E7EB",
+  border: "2px solid #BBF7D0",
+  borderRadius: "14px",
+  background: "#F9FFFB",
+  fontSize: "15px",
   boxSizing: "border-box",
+  outline: "none",
 };
 
 const buttonStyle = {
-  background:
-    "linear-gradient(135deg,#2563EB,#3B82F6)",
+  marginTop: "28px",
+  width: "220px",
+  padding: "15px",
+  background: "linear-gradient(135deg,#15803D,#22C55E)",
   color: "#fff",
   border: "none",
-  padding: "14px 25px",
-  borderRadius: "12px",
+  borderRadius: "999px",
+  fontSize: "16px",
+  fontWeight: "700",
   cursor: "pointer",
 };
+
+const buttonGrid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
+  gap: "15px",
+};
+
 const actionButton = {
-  width: "100%",
-  padding: "14px",
-  marginBottom: "12px",
-  background: "#F3F4F6",
-  border: "1px solid #E5E7EB",
-  borderRadius: "10px",
+  padding: "15px",
+  border: "1px solid #BBF7D0",
+  borderRadius: "14px",
+  background: "#F0FDF4",
+  color: "#14532D",
+  fontWeight: "600",
   cursor: "pointer",
-  textAlign: "left",
-  fontSize: "16px",
 };
 
 const deleteButton = {
   ...actionButton,
-  background: "#FEE2E2",
+  background: "#FEF2F2",
+  border: "1px solid #FECACA",
   color: "#DC2626",
 };
 
-const logoutButton = {
-  marginTop: "25px",
-  width: "100%",
-maxWidth: "600px",
-  padding: "15px",
-  background: "#EF4444",
-  color: "#fff",
-  border: "none",
-  borderRadius: "12px",
-  fontSize: "17px",
-  fontWeight: "600",
-  cursor: "pointer",
-};
+
 export default ProfileScreen;

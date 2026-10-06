@@ -76,7 +76,15 @@ const remaining = budget - totalSpent;
 return (
   <div className="app-layout">
   <Sidebar />
-  <main className="page-content" >
+  <main
+  className="page-content"
+  style={{
+    background: "#F4F7F2",
+    minHeight: "100vh",
+    padding: "35px",
+    fontFamily: "Poppins, sans-serif",
+  }}
+>
 
       {/* Header */}
       <div
@@ -89,9 +97,28 @@ return (
     marginBottom: "25px",
   }}
 >
-  <h1 style={{ margin: 0, color: "#111827" }}>
+  <div>
+  <h1
+    style={{
+      margin: 0,
+      color: "#14532D",
+      fontSize: "36px",
+      fontWeight: "700",
+    }}
+  >
     Expense List
   </h1>
+
+  <p
+    style={{
+      color: "#64748B",
+      marginTop: "6px",
+      fontSize: "17px",
+    }}
+  >
+    View, filter and manage all your expenses.
+  </p>
+</div>
 
   <div style={summaryCard}>
     <div style={summaryItem}>
@@ -168,25 +195,38 @@ return (
                     <td style={tableCell}>{expense.title}</td>
                     <td style={tableCell}>{expense.category}</td>
 
-<td style={tableCell}>
+<td
+  style={{
+    ...tableCell,
+    textAlign: "center",
+    verticalAlign: "middle",
+    width: "140px",
+  }}
+>
   <div
     style={{
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      gap: "10px",
+      width: "100%",
+      fontWeight: "600",
+      fontSize: "15px",
+      color: "#374151",
     }}
   >
-    {expense.paymentMode === "Cash" && "💵 Cash"}
-    {expense.paymentMode === "UPI" && "📱 UPI"}
-    {expense.paymentMode === "Card" && "💳 Card"}
+    {expense.paymentMode === "Cash" && "Cash"}
+    {expense.paymentMode === "UPI" && "UPI"}
+    {expense.paymentMode === "Card" && "Card"}
   </div>
 </td>
 
 <td style={tableCell}>
   <span
     style={{
-      padding: "6px 10px",
+      padding: "8px 14px",
+fontSize: "15px",
+fontWeight: "700",
+borderRadius: "20px",
       borderRadius: "15px",
       color: "#fff",
       backgroundColor:
@@ -194,7 +234,6 @@ return (
           ? "#22C55E"
           : "#F59E0B",
       fontWeight: "bold",
-      fontSize: "13px",
     }}
   >
     {expense.expenseType}
@@ -235,54 +274,59 @@ return (
 
 
 const tableCard = {
-  background: "#fff",
-  borderRadius: "20px",
+  background: "#FFFFFF",
+  borderRadius: "24px",
   overflowX: "auto",
-  boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+  border: "1px solid #E5E7EB",
+  boxShadow: "0 16px 36px rgba(15,23,42,.08)",
 };
 
 const emptyState = {
-  background: "#fff",
-  padding: "35px",
-  borderRadius: "20px",
-  color: "#6B7280",
+  background: "#FFFFFF",
+  padding: "45px",
+  borderRadius: "24px",
   textAlign: "center",
-  boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+  color: "#64748B",
+  fontSize: "18px",
+  border: "1px solid #E5E7EB",
+  boxShadow: "0 16px 36px rgba(15,23,42,.08)",
 };
 
 const tableHead = {
-  padding: "15px",
-  textAlign: "left",
-  color: "#374151",
-  background: "#EFF6FF",
-  position: "sticky",
-  top: 0,
-  zIndex: 1,
+  padding: "18px",
+  textAlign: "center",
+  color: "#14532D",
+  background: "#DCFCE7",
+  fontWeight: "700",
+  fontSize: "16px",
 };
-
 const tableCell = {
-  padding: "15px",
+  padding: "18px",
   borderBottom: "1px solid #E5E7EB",
-  color: "#4B5563",
+  color: "#374151",
+  fontWeight: "500",
+  fontSize: "15px",
   whiteSpace: "nowrap",
+  verticalAlign: "middle",
+  textAlign: "center",
 };
-
 const editBtn = {
-  background: "#3B82F6",
-  color: "#fff",
+  background: "#22C55E",
+  color: "#FFFFFF",
   border: "none",
-  padding: "8px 12px",
-  borderRadius: "8px",
-  marginRight: "8px",
+  padding: "10px 18px",
+  borderRadius: "12px",
+  fontWeight: "700",
   cursor: "pointer",
+  marginRight: "10px",
 };
-
 const deleteBtn = {
   background: "#EF4444",
-  color: "#fff",
+  color: "#FFFFFF",
   border: "none",
-  padding: "8px 12px",
-  borderRadius: "8px",
+  padding: "10px 18px",
+  borderRadius: "12px",
+  fontWeight: "700",
   cursor: "pointer",
 };
 // const selectStyle = {
@@ -297,32 +341,36 @@ const deleteBtn = {
 const summaryCard = {
   display: "flex",
   flexWrap: "wrap",
-  gap: "15px",
+  gap: "30px",
   background: "#FFFFFF",
-  padding: "15px 25px",
-  borderRadius: "15px",
-  boxShadow: "0 4px 15px rgba(0,0,0,0.08)",
-  alignItems: "center",
+  padding: "22px 30px",
+  borderRadius: "22px",
+  border: "1px solid #E5E7EB",
+  boxShadow: "0 16px 36px rgba(15,23,42,.08)",
 };
 const summaryItem = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  minWidth: "90px",
+  minWidth: "130px",
+  color: "#14532D",
+  fontWeight: "700",
+  fontSize: "17px",
 };
-
 const filterContainer = {
   display: "flex",
-  gap: "15px",
-  marginBottom: "20px",
+  gap: "18px",
+  marginBottom: "30px",
+  flexWrap: "wrap",
 };
-
 const selectStyle = {
-  padding: "10px 14px",
-  border: "1px solid #D1D5DB",
-  borderRadius: "8px",
-  background: "#fff",
-  fontSize: "14px",
+  padding: "14px 18px",
+  border: "2px solid #D1FAE5",
+  borderRadius: "14px",
+  background: "#F9FFFB",
+  color: "#14532D",
+  fontWeight: "600",
+  fontSize: "16px",
   cursor: "pointer",
 };
 export default ExpenseListScreen;

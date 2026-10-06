@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import api from "../services/api";
-
+import { Player } from "@lottiefiles/react-lottie-player";
+import tickAnimation from "../assets/Checklist.json";
 function AddExpenseScreen() {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
   const [category, setCategory] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
 const [expenseType, setExpenseType] = useState("Need");
@@ -46,20 +48,29 @@ const handleSaveExpense = async () => {
     if (message && !window.confirm(message)) return;
 
     await api.post(`/expenses?userId=${userId}`, {
-      title,
-      amount: newAmount,
-      category,
-      paymentMode,
-      expenseType,
-      date: new Date().toISOString().split("T")[0],
-    });
+  title,
+  amount: newAmount,
+  category,
+  paymentMode,
+  expenseType,
+  date: new Date().toISOString().split("T")[0],
+});
 
-    alert("Expense Added Successfully!");
-    setTitle("");
-    setAmount("");
-    setCategory("");
-    setPaymentMode("UPI");
-    setExpenseType("Need");
+// Show animation
+setShowSuccess(true);
+
+// Hide after 2.5 seconds
+setTimeout(() => {
+  setShowSuccess(false);
+}, 2500);
+
+// Clear form
+setTitle("");
+setAmount("");
+setCategory("");
+setPaymentMode("UPI");
+setExpenseType("Need");
+    
   } catch (error) {
     console.error(error);
     alert("Failed to save expense");
@@ -67,14 +78,37 @@ const handleSaveExpense = async () => {
 };
 
   return (
-    <div className="app-layout">
+    <div
+  className="app-layout"
+  style={{
+    background: "#F4F7F2",
+    minHeight: "100vh",
+  }}
+>
     <Sidebar />
 
     <main className="page-content">
       <div style={formCard}>
-          <h1 style={{ margin: "0 0 25px", color: "#111827" }}>
-            Add New Expense
-          </h1>
+          <h1
+  style={{
+    margin: "0 0 10px",
+    color: "#166534",
+    fontSize: "34px",
+    fontWeight: "700",
+  }}
+>
+  Add New Expense
+</h1>
+
+<p
+  style={{
+    color: "#6B7280",
+    marginBottom: "30px",
+  }}
+>
+  Record your spending and stay on track.
+</p>
+            
 
           <input
             type="text"
@@ -121,23 +155,58 @@ const handleSaveExpense = async () => {
 <option value="Festival">Festivals & Gifts</option>
 <option value="Others">Others</option>
 </select>
-<h3>Payment Mode</h3>
+<h3
+  style={{
+    fontSize: "20px",
+    fontWeight: "700",
+    color: "#14532D",
+    marginBottom: "15px",
+    marginTop: "10px",
+  }}
+>
+  Payment Mode
+</h3>
+
+<h3
+  style={{
+    fontSize: "20px",
+    fontWeight: "700",
+    color: "#14532D",
+    marginBottom: "15px",
+    marginTop: "20px",
+  }}
+>
+  Expense Type
+</h3>
 
 <div style={buttonGroup}>
   <button
-    type="button"
-    style={paymentMode === "Cash" ? activeButton : optionButton}
-    onClick={() => setPaymentMode("Cash")}
-  >
-    💵 Cash
-  </button>
+  type="button"
+  style={paymentMode === "Cash" ? activeButton : optionButton}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform = "translateY(-3px)";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = "translateY(0)";
+  }}
+  onClick={() => setPaymentMode("Cash")}
+>
+  Cash
+</button>
 
   <button
     type="button"
     style={paymentMode === "UPI" ? activeButton : optionButton}
-    onClick={() => setPaymentMode("UPI")}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.transform="translateY(-3px)";
+    }}
+    onMouseLeave={(e)=>{
+      e.currentTarget.style.transform="translateY(0)";
+
+    }}
+    onClick={()=>setPaymentMode("UPI")}
   >
-    📱 UPI
+   UPI
   </button>
 
   <button
@@ -148,7 +217,14 @@ const handleSaveExpense = async () => {
     💳 Card
   </button>
 </div>
-<h3>Expense Type</h3>
+<h3
+  style={{
+    color: "#166534",
+    marginBottom: "12px",
+  }}
+>
+  Expense Type
+</h3>
 
 <div style={buttonGroup}>
   <button
@@ -175,6 +251,30 @@ const handleSaveExpense = async () => {
             Save Expense
           </button>
         </div>
+       {showSuccess && (
+  <div style={successOverlay}>
+    <div style={successCard}>
+      <Player
+  src={tickAnimation}
+  autoplay
+  keepLastFrame
+  style={{
+    height: "180px",
+    width: "180px",
+  }}
+/>
+
+      <h2 style={{ color: "#15803D" }}>
+        Expense Added!
+      </h2>
+
+      <p style={{ color: "#64748B" }}>
+        Your expense has been saved successfully.
+      </p>
+    </div>
+  </div>
+)}
+
       </main>
     </div>
   );
@@ -183,61 +283,91 @@ const handleSaveExpense = async () => {
 
 
 const formCard = {
-  maxWidth: "650px",
+  maxWidth: "700px",
   margin: "40px auto",
-  background: "#fff",
-  padding: "35px",
-  borderRadius: "20px",
-  boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+  background: "#FFFFFF",
+  padding: "40px",
+  borderRadius: "24px",
+  border: "1px solid #DCFCE7",
+  boxShadow: "0 18px 40px rgba(21,128,61,0.12)",
 };
 
 const inputStyle = {
   width: "100%",
-  padding: "14px",
+  padding: "15px 18px",
   marginBottom: "18px",
-  borderRadius: "12px",
-  border: "1px solid #E5E7EB",
-  fontSize: "15px",
+  borderRadius: "14px",
+  border: "1px solid #BBF7D0",
+  background: "#F9FFFB",
+  fontSize: "16px",
+  outline: "none",
   boxSizing: "border-box",
 };
 
 const btnStyle = {
   width: "100%",
-  padding: "14px",
-  background:
-    "linear-gradient(135deg,#2563EB,#3B82F6)",
-  color: "#fff",
+  padding: "16px",
+  marginTop: "15px",
+  background: "linear-gradient(135deg,#15803D,#22C55E)",
+  color: "#FFFFFF",
   border: "none",
-  borderRadius: "12px",
+  borderRadius: "14px",
   cursor: "pointer",
-  fontWeight: "600",
-  fontSize: "16px",
+  fontWeight: "700",
+  fontSize: "17px",
+  boxShadow: "0 10px 25px rgba(21,128,61,0.25)",
 };
 const buttonGroup = {
   display: "flex",
-  gap: "10px",
-  marginBottom: "20px",
+  gap: "15px",
+  marginBottom: "25px",
 };
 
 const optionButton = {
   flex: 1,
-  padding: "12px",
-  border: "1px solid #D1D5DB",
-  borderRadius: "10px",
+  padding: "16px",
+  border: "2px solid #BBF7D0",
+  borderRadius: "14px",
   background: "#FFFFFF",
+  color: "#14532D",
   cursor: "pointer",
-  fontSize: "15px",
+  fontSize: "17px",
+  fontWeight: "700",
+  transition: "0.3s",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
 };
 
 const activeButton = {
   flex: 1,
-  padding: "12px",
+  padding: "16px",
   border: "none",
-  borderRadius: "10px",
-  background: "#2563EB",
+  borderRadius: "14px",
+  background: "linear-gradient(135deg,#15803D,#22C55E)",
   color: "#FFFFFF",
   cursor: "pointer",
-  fontSize: "15px",
-  fontWeight: "bold",
+  fontSize: "17px",
+  fontWeight: "700",
+  boxShadow: "0 10px 25px rgba(21,128,61,0.3)",
+};
+const successOverlay = {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  background: "rgba(0,0,0,0.25)",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 9999,
+};
+
+const successCard = {
+  background: "#FFFFFF",
+  padding: "35px",
+  borderRadius: "25px",
+  textAlign: "center",
+  boxShadow: "0 20px 50px rgba(0,0,0,.2)",
+  width: "320px",
 };
 export default AddExpenseScreen;

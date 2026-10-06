@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import api from "../services/api";
+import logo from "../assets/logo.jpeg";
 import PieChartComponent from "../components/PieChartComponent";
 function DashboardScreen() {
   const navigate = useNavigate();
@@ -106,31 +107,160 @@ const getPercentage = (category) =>
   totalSpent > 0
     ? Math.round(((categoryTotals[category] || 0) / totalSpent) * 100)
     : 0;
-  return (
-  <div className="app-layout">
-  <Sidebar />
+return (
+  <div
+    className="app-layout"
+    style={{
+      background: "#F4F7F2",
+      minHeight: "100vh",
+      fontFamily: "Poppins, Arial, sans-serif",
+    }}
+  >
+    <div
+  style={{
+    position: "fixed",
+    width: "220px",
+    height: "220px",
+    borderRadius: "50%",
+    background: "#DDE8D8",
+    top: "-70px",
+    left: "-70px",
+    zIndex: 0,
+  }}
+/>
 
-  <main className="page-content">
-    
+<div
+  style={{
+    position: "fixed",
+    width: "260px",
+    height: "260px",
+    borderRadius: "50%",
+    background: "#E6F4EA",
+    bottom: "-80px",
+    right: "-80px",
+    zIndex: 0,
+  }}
+/>
+    <Sidebar />
+
+    <main
+  className="page-content"
+  style={{
+    flex: 1,
+    padding: "35px",
+    position: "relative",
+    zIndex: 1,
+  }}
+>
+      {/* Dashboard Header */}
+
+      <div
+        style={{
+          background: "#FFFFFF",
+          borderRadius: "24px",
+          padding: "22px 28px",
+          boxShadow: "0 16px 36px rgba(15,23,42,0.08)",
+          marginBottom: "30px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "18px",
+          }}
+        >
+          <img
+            src={logo}
+            alt="Pocket Planner"
+            style={{
+              width: "65px",
+              height: "65px",
+              borderRadius: "15px",
+              objectFit: "contain",
+            }}
+          />
+
+          <div>
+            <h2
+              style={{
+                margin: 0,
+                color: "#15803D",
+                fontWeight: "700",
+              }}
+            >
+              Pocket Planner
+            </h2>
+
+            <p
+              style={{
+                margin: "5px 0 0",
+                color: "#64748B",
+              }}
+            >
+              Manage your finances smarter
+            </p>
+          </div>
+        </div>
+
+        <div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end",
+  }}
+>
+  <span
+    style={{
+      fontSize: "16px",
+      color: "#64748B",
+      fontWeight: "500",
+    }}
+  >
+    Welcome
+  </span>
+
+  <span
+    style={{
+      fontSize: "28px",
+      color: "#15803D",
+      fontWeight: "700",
+    }}
+  >
+    {user?.name}
+  </span>
+</div>
+      </div>
+
+      <h1
+  style={{
+    fontSize: "48px",
+    fontWeight: "800",
+    color: "#0F172A",
+    marginBottom: "8px",
+  }}
+>
+  Welcome Back{" "}
+  <span style={{ color: "#15803D" }}>
+    {user?.name}
+  </span>
+</h1>
+
+<p
+  style={{
+    color: "#166534",
+    fontWeight: "600",
+    fontSize: "18px",
+  }}
+>
   
-        <header style={{ marginBottom: "30px" }}>
-          <h1
-  style={{
-    color: "#111827",
-    margin: "0 0 5px",
-  }}
->
-            Welcome Back 👋
-          </h1><p
-  style={{
-    color: "#6B7280",
-    margin: 0,
-  }}
->
-          
-            Track your expenses and manage your budget.
-          </p>
-        </header>
+        Track your expenses and manage your budget effortlessly.
+      </p>
+        
 
         <div style={summaryGrid}>
          <SummaryCard
@@ -491,12 +621,18 @@ function SummaryCard({ label, value }) {
 
   return (
     <div
-      style={{
-        ...summaryCard,
-        background: "#FFFFFF",
-        color: "#111827",
-      }}
-    >
+  style={summaryCard}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform = "translateY(-4px)";
+    e.currentTarget.style.boxShadow =
+      "0 18px 40px rgba(253, 253, 253, 0.25)";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = "translateY(0)";
+    e.currentTarget.style.boxShadow =
+      "0 15px 35px rgba(21,128,61,.25)";
+  }}
+>
      <p
   style={{
     ...cardLabel,
@@ -544,11 +680,12 @@ const summaryGrid = {
   marginBottom: "25px",
 };
 const summaryCard = {
-  padding: "25px",
-  borderRadius: "20px",
-  boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
-  width: "100%",
-  boxSizing: "border-box"
+  background: "#FFFFFF",
+  padding: "28px",
+  borderRadius: "22px",
+  borderTop: "6px solid #15803D",
+  boxShadow: "0 15px 35px rgba(15,23,42,0.08)",
+  transition: "0.3s",
 };
 const expenseItem = {
   display: "flex",
@@ -570,33 +707,34 @@ const detailsGrid = {
 
 const progressTrack = {
   width: "100%",
-  height: "15px",
-  background: "#E5E7EB",
+  height: "16px",
+  background: "#DCFCE7",
   borderRadius: "20px",
   overflow: "hidden",
   marginTop: "15px",
 };
-
 const progressValue = {
   height: "100%",
   borderRadius: "20px",
+  background: "#15803D",
 };
 
 const cardLabel = {
-  color: "#6B7280",
-  margin: "0 0 10px",
+  color: "#64748B",
+  fontWeight: "600",
+  marginBottom: "10px",
 };
 
 const cardValue = {
-  color: "#111827",
-  margin: 0,
+  color: "#15803D",
+  fontSize: "32px",
+  fontWeight: "700",
 };
-
 const sectionTitle = {
-  color: "#111827",
-  margin: "0 0 15px",
+  color: "#15803D",
+  fontSize: "26px",
+  fontWeight: "700",
 };
-
 
 const overviewGrid = {
   display: "grid",
@@ -617,23 +755,22 @@ const quickGrid = {
 };
 const quickCard = {
   width: "100%",
-  padding: "25px",
-  border: "none",
-  borderRadius: "18px",
-  background: "#EEF4FF",
+  padding: "28px",
+  borderRadius: "20px",
+  background: "#F0FDF4",
+  border: "1px solid #BBF7D0",
   cursor: "pointer",
-  textAlign: "center",
-  boxShadow: "0 4px 15px rgba(0,0,0,0.08)",
-  color: "#111827",
-  fontSize: "16px",
+  boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+  transition: "0.3s",
+  color: "#14532D",
+  fontWeight: "600",
 };
 const sectionCard = {
   background: "#FFFFFF",
-  padding: "20px",
-  borderRadius: "20px",
-  boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+  borderRadius: "22px",
+  padding: "24px",
   marginBottom: "25px",
-  width: "100%",
-  boxSizing: "border-box",
+  boxShadow: "0 16px 36px rgba(15,23,42,0.08)",
+  border: "1px solid #E5E7EB",
 };
 export default DashboardScreen;

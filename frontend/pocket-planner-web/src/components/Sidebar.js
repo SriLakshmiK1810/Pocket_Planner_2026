@@ -31,9 +31,15 @@ function Sidebar() {
             ☰
           </button>
 
-          <h2 style={{ margin: 0, color: "#60A5FA" }}>
-            💰 Pocket Planner
-          </h2>
+          <h2
+  style={{
+    color: "#15803D",
+    marginBottom: "25px",
+    fontWeight: "700",
+  }}
+>
+  Pocket Planner
+</h2>
         </div>
       )}
 
@@ -55,16 +61,21 @@ function Sidebar() {
     boxShadow: mobile ? "2px 0 10px rgba(0,0,0,0.3)" : "none",
   }}
 >
-        <h2 style={{ color: "#60A5FA" }}>
-          💰 Pocket Planner
+        <h2 style={{ color: "#0e612c" }}>
+        Pocket Planner
         </h2>
 
         <div style={userCardStyle}>
-          <p style={{ margin: 0, color: "#D1D5DB" }}>
+          <p style={{ margin: 0, color: "#15803D" }}>
             Hello 👋
           </p>
 
-          <h3 style={{ margin: "5px 0 0" }}>
+          <h3
+  style={{
+    margin: "5px 0 0",
+    color: "#14532D",
+  }}
+>
             {user.name || "Guest User"}
           </h3>
         </div>
@@ -90,12 +101,20 @@ function Sidebar() {
 function MenuLink({ to, text, close }) {
   return (
     <Link
-      to={to}
-      style={linkStyle}
-      onClick={close}
-    >
-      {text}
-    </Link>
+  to={to}
+  style={linkStyle}
+  onClick={close}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.background = "#1f8f46";
+    e.currentTarget.style.color = "#fcfdfc";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.background = "transparent";
+    e.currentTarget.style.color = "#374151";
+  }}
+>
+  {text}
+</Link>
   );
 }
 
@@ -103,15 +122,17 @@ const sidebarStyle = {
   position: "fixed",
   top: 0,
   left: 0,
-  width: "250px",
+  width: "260px",
   height: "100vh",
-  background: "#111827",
-  color: "#fff",
-  padding: "20px",
+  background: "#F8FAF5",
+  color: "#14532D",
+  padding: "24px",
   transition: "0.3s",
   zIndex: 1000,
   display: "flex",
   flexDirection: "column",
+  borderRight: "1px solid #D1E7D3",
+  boxShadow: "6px 0 20px rgba(0,0,0,0.05)",
 };
 
 const mobileHeader = {
@@ -119,20 +140,24 @@ const mobileHeader = {
   top: 0,
   left: 0,
   right: 0,
-  height: "60px",
-  background: "#111827",
+  height: "65px",
+  background: "#FFFFFF",
   display: "flex",
   alignItems: "center",
   gap: "15px",
-  padding: "0 15px",
+  padding: "0 20px",
+  borderBottom: "1px solid #D1E7D3",
+  boxShadow: "0 2px 10px rgba(0,0,0,.05)",
   zIndex: 1100,
 };
-
 const menuButton = {
-  background: "transparent",
+  background: "#DCFCE7",
   border: "none",
-  color: "#fff",
+  color: "#15803D",
   fontSize: "24px",
+  width: "42px",
+  height: "42px",
+  borderRadius: "10px",
   cursor: "pointer",
 };
 
@@ -147,29 +172,33 @@ const overlay = {
 };
 
 const userCardStyle = {
-  background: "#1F2937",
-  padding: "15px",
-  borderRadius: "15px",
+  background: "#ECFDF5",
+  padding: "18px",
+  borderRadius: "18px",
   marginBottom: "30px",
+  border: "1px solid #BBF7D0",
 };
 
 const linkStyle = {
   display: "block",
-  color: "#D1D5DB",
+  color: "#374151",
   textDecoration: "none",
-  padding: "12px",
+  padding: "14px 18px",
   marginBottom: "10px",
-  borderRadius: "10px",
+  borderRadius: "14px",
+  fontWeight: "600",
+  transition: "0.3s",
 };
-
 const logoutStyle = {
   width: "100%",
-  padding: "12px",
-  background: "#EF4444",
-  color: "#fff",
+  padding: "14px",
+  background: "#15803D",
+  color: "#FFFFFF",
   border: "none",
-  borderRadius: "10px",
+  borderRadius: "14px",
   cursor: "pointer",
+  fontWeight: "600",
+  boxShadow: "0 8px 20px rgba(21,128,61,.2)",
 };
 
 export default Sidebar;

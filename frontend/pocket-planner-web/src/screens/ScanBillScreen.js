@@ -101,232 +101,351 @@ const handleSave = async () => {
     <div className="app-layout">
         <Sidebar />
 
-      <main className="page-content" style={mainContent}>
-        <div style={card}>
-          <h1>📷 Scan Bill</h1>
+      <main
+  className="page-content"
+  style={{
+    background: "#F4F7F2",
+    minHeight: "100vh",
+    padding: "35px",
+    fontFamily: "Poppins, sans-serif",
+  }}
+>
+  <div style={container}>
+    <h1 style={pageTitle}>📷 Scan Bill</h1>
 
-          <p>
-            Upload or capture your bill. The app will automatically extract:
-          </p>
+    <p style={pageSubtitle}>
+      Upload or capture a bill and let Pocket Planner extract the expense details automatically.
+    </p>
 
-        
-          <input
+    <div style={card}>
+     <label htmlFor="bill-upload" style={uploadCard}>
+  <div style={{ fontSize: "60px" }}>📄</div>
+
+  <h2 style={{ color: "#14532D", margin: "15px 0 10px" }}>
+    Upload Your Bill
+  </h2>
+
+  <p style={{ color: "#64748B", marginBottom: "25px" }}>
+    Click the button below to choose your receipt
+  </p>
+
+  <span style={browseButton}>
+    📁 Choose Image
+  </span>
+</label>
+
+<input
+  id="bill-upload"
   ref={fileInputRef}
   type="file"
   accept="image/*"
   capture="environment"
+  style={{ display: "none" }}
   onChange={async (e) => {
-  const file = e.target.files[0];
+    const file = e.target.files[0];
 
-  if (file) {
-    const compressedFile = await compressImage(file);
-    setImage(compressedFile);
-    setPreview(URL.createObjectURL(compressedFile));
-  }
-}}
-  className="bill-file-input"
+    if (file) {
+      const compressedFile = await compressImage(file);
+      setImage(compressedFile);
+      setPreview(URL.createObjectURL(compressedFile));
+    }
+  }}
 />
 
-{preview && (
-  <img
-    src={preview}
-    alt="Bill Preview"
-    style={{
-      width: "100%",
-      maxHeight: "400px",
-      objectFit: "contain",
-      marginTop: "20px",
-      borderRadius: "10px",
-      border: "1px solid #ddd",
-    }}
-  />
-)}
+      {preview && (
+        <img
+          src={preview}
+          alt="Bill Preview"
+          style={previewStyle}
+        />
+      )}
 
-          <br />
-          <br />
+      <button
+        style={buttonStyle}
+        onClick={handleScan}
+      >
+        🔍 Scan Bill
+      </button>
+
+      {expenseData.title && (
+        <div style={reviewCard}>
+          <h2 style={reviewTitle}>
+            📄 Extracted Expense Details
+          </h2>
+
+          <div style={field}>
+            <label style={label}>Title</label>
+            <input
+              style={input}
+              value={expenseData.title}
+              onChange={(e) =>
+                setExpenseData({
+                  ...expenseData,
+                  title: e.target.value,
+                })
+              }
+            />
+          </div>
+
+          <div style={field}>
+            <label style={label}>Amount</label>
+            <input
+              style={input}
+              type="number"
+              value={expenseData.amount}
+              onChange={(e) =>
+                setExpenseData({
+                  ...expenseData,
+                  amount: e.target.value,
+                })
+              }
+            />
+          </div>
+
+          <div style={field}>
+            <label style={label}>Category</label>
+
+            <select
+              style={input}
+              value={expenseData.category}
+              onChange={(e) =>
+                setExpenseData({
+                  ...expenseData,
+                  category: e.target.value,
+                })
+              }
+            >
+              <option value="">Select Category</option>
+              <option value="Groceries">Groceries</option>
+              <option value="Vegetables">Vegetables</option>
+              <option value="Fruits">Fruits</option>
+              <option value="Milk">Milk & Dairy</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Food">Food & Dining</option>
+              <option value="Travel">Travel</option>
+              <option value="Transport">Transport</option>
+              <option value="Bills">Bills & Utilities</option>
+              <option value="Medical">Medical</option>
+              <option value="Education">Education</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Repair">Repair & Maintenance</option>
+              <option value="EMI">EMI & Loans</option>
+              <option value="Festival">Festivals & Gifts</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+
+          <div style={field}>
+            <label style={label}>Date</label>
+
+            <input
+              style={input}
+              type="date"
+              value={expenseData.date}
+              onChange={(e) =>
+                setExpenseData({
+                  ...expenseData,
+                  date: e.target.value,
+                })
+              }
+            />
+          </div>
+
+          <div style={field}>
+            <label style={label}>Payment Mode</label>
+
+            <select
+              style={input}
+              value={expenseData.paymentMode}
+              onChange={(e) =>
+                setExpenseData({
+                  ...expenseData,
+                  paymentMode: e.target.value,
+                })
+              }
+            >
+              <option>UPI</option>
+              <option>Cash</option>
+              <option>Card</option>
+            </select>
+          </div>
+
+          <div style={field}>
+            <label style={label}>Expense Type</label>
+
+            <select
+              style={input}
+              value={expenseData.expenseType}
+              onChange={(e) =>
+                setExpenseData({
+                  ...expenseData,
+                  expenseType: e.target.value,
+                })
+              }
+            >
+              <option>Need</option>
+              <option>Want</option>
+            </select>
+          </div>
 
           <button
-  style={buttonStyle}
-  onClick={handleScan}
->
-  🔍 Scan Bill
-</button>
-{expenseData.title && (
-  <div style={reviewCard}>
-    <h2 style={{ marginBottom: "20px", color: "#2563EB" }}>
-      📄 Extracted Expense Details
-    </h2>
-
-    <div style={field}>
-      <label style={label}>Title</label>
-      <input
-        style={input}
-        value={expenseData.title}
-        onChange={(e) =>
-          setExpenseData({ ...expenseData, title: e.target.value })
-        }
-      />
+            style={saveButton}
+            onClick={handleSave}
+          >
+            ✅ Confirm & Save
+          </button>
+        </div>
+      )}
     </div>
-
-    <div style={field}>
-      <label style={label}>Amount</label>
-      <input
-        style={input}
-        type="number"
-        value={expenseData.amount}
-        onChange={(e) =>
-          setExpenseData({ ...expenseData, amount: e.target.value })
-        }
-      />
-    </div>
-
-    <div style={field}>
-      <label style={label}>Category</label>
-      <select
-        style={input}
-        value={expenseData.category}
-        onChange={(e) =>
-          setExpenseData({ ...expenseData, category: e.target.value })
-        }
-      >
-        <option value="">Select Category</option>
-<option value="Groceries">Groceries</option>
-<option value="Vegetables">Vegetables</option>
-<option value="Fruits">Fruits</option>
-<option value="Milk">Milk & Dairy</option>
-<option value="Snacks">Snacks</option>
-<option value="Food">Food & Dining</option>
-<option value="Travel">Travel</option>
-<option value="Transport">Transport</option>
-<option value="Bills">Bills & Utilities</option>
-<option value="Medical">Medical</option>
-<option value="Education"> Education</option>
-<option value="Shopping">Shopping</option>
-<option value="Clothing">Clothing</option>
-<option value="Electronics">Electronics</option>
-<option value="Repair">Repair & Maintenance</option>
-<option value="EMI">EMI & Loans</option>
-<option value="Festival">Festivals & Gifts</option>
-<option value="Others">Others</option>
-      </select>
-    </div>
-
-    <div style={field}>
-      <label style={label}>Date</label>
-      <input
-        style={input}
-        type="date"
-        value={expenseData.date}
-        onChange={(e) =>
-          setExpenseData({ ...expenseData, date: e.target.value })
-        }
-      />
-    </div>
-
-    <div style={field}>
-      <label style={label}>Payment Mode</label>
-      <select
-        style={input}
-        value={expenseData.paymentMode}
-        onChange={(e) =>
-          setExpenseData({ ...expenseData, paymentMode: e.target.value })
-        }
-      >
-        <option>UPI</option>
-        <option>Cash</option>
-        <option>Card</option>
-      </select>
-    </div>
-
-    <div style={field}>
-      <label style={label}>Expense Type</label>
-      <select
-        style={input}
-        value={expenseData.expenseType}
-        onChange={(e) =>
-          setExpenseData({ ...expenseData, expenseType: e.target.value })
-        }
-      >
-        <option>Need</option>
-        <option>Want</option>
-      </select>
-    </div>
-
-    <button
-      style={saveButton}
-      onClick={handleSave}
-    >
-      ✅ Confirm & Save
-    </button>
   </div>
-)}        </div>
-      </main>
+</main>
     </div>
   );
 }
 
-const mainContent = {
-  flex: 1,
-  padding: "35px",
-  background: "#F8FAFC",
+const container = {
+  maxWidth: "850px",
+  margin: "0 auto",
+};
+
+const pageTitle = {
+  color: "#14532D",
+  fontSize: "42px",
+  fontWeight: "700",
+  marginBottom: "8px",
+};
+
+const pageSubtitle = {
+  color: "#64748B",
+  fontSize: "17px",
+  marginBottom: "30px",
 };
 
 const card = {
-  maxWidth: "700px",
-  margin: "40px auto",
-  background: "#fff",
-  padding: "30px",
-  borderRadius: "20px",
-  boxShadow: "0 5px 20px rgba(0,0,0,0.08)",
+  background: "#FFFFFF",
+  borderRadius: "24px",
+  padding: "35px",
+  border: "1px solid #E5E7EB",
+  boxShadow: "0 16px 36px rgba(15,23,42,.08)",
 };
 
-const buttonStyle = {
-  padding: "12px 25px",
-  background: "#2563EB",
+const previewStyle = {
+  width: "100%",
+  maxHeight: "450px",
+  objectFit: "contain",
+  marginTop: "30px",
+  borderRadius: "18px",
+  border: "2px solid #BBF7D0",
+  padding: "15px",
+  background: "#F9FFFB",
+};
+const uploadCard = {
+  border: "2px dashed #22C55E",
+  borderRadius: "20px",
+  background: "#F9FFFB",
+  padding: "55px 30px",
+  minHeight: "260px",
+
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+
+  textAlign: "center",
+  cursor: "pointer",
+  transition: "0.3s",
+};
+const browseButton = {
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+
+  padding: "14px 32px",
+  borderRadius: "999px",
+
+  background: "linear-gradient(135deg,#15803D,#22C55E)",
   color: "#fff",
+
+  fontWeight: "700",
+  fontSize: "16px",
+
+  boxShadow: "0 10px 25px rgba(21,128,61,.25)",
+};
+const buttonStyle = {
+  width: "100%",
+  maxWidth: "320px",
+  margin: "30px auto 0",
+  display: "block",
+
+  padding: "16px",
+
+  background: "linear-gradient(135deg,#15803D,#22C55E)",
+  color: "#fff",
+
   border: "none",
-  borderRadius: "10px",
+  borderRadius: "999px",
+
+  fontSize: "17px",
+  fontWeight: "700",
+
   cursor: "pointer",
 };
+
 const reviewCard = {
-  marginTop: "30px",
-  background: "#F9FAFB",
+  marginTop: "35px",
+  background: "#FFFFFF",
   border: "1px solid #E5E7EB",
-  borderRadius: "15px",
-  padding: "25px",
+  borderRadius: "22px",
+  padding: "30px",
+  boxShadow: "0 10px 25px rgba(15,23,42,.06)",
+};
+
+const reviewTitle = {
+  color: "#15803D",
+  fontSize: "26px",
+  fontWeight: "700",
+  marginBottom: "25px",
 };
 
 const field = {
   display: "flex",
   flexDirection: "column",
-  marginBottom: "18px",
+  marginBottom: "22px",
 };
 
 const label = {
+  marginBottom: "8px",
+  color: "#14532D",
   fontWeight: "600",
-  marginBottom: "6px",
-  color: "#374151",
+  fontSize: "16px",
 };
 
 const input = {
-  padding: "12px",
-  border: "1px solid #D1D5DB",
-  borderRadius: "8px",
-  fontSize: "15px",
+  width: "100%",
+  padding: "15px",
+  border: "2px solid #BBF7D0",
+  borderRadius: "14px",
+  background: "#F9FFFB",
+  color: "#14532D",
+  fontSize: "16px",
+  outline: "none",
+  boxSizing: "border-box",
 };
 
 const saveButton = {
   width: "100%",
-  padding: "14px",
-  background: "#2563EB",
-  color: "#fff",
+  marginTop: "20px",
+  padding: "16px",
+  background: "linear-gradient(135deg,#15803D,#22C55E)",
+  color: "#FFFFFF",
   border: "none",
-  borderRadius: "10px",
-  fontWeight: "bold",
-  fontSize: "16px",
+  borderRadius: "999px",
+  fontWeight: "700",
+  fontSize: "17px",
   cursor: "pointer",
-  marginTop: "15px",
+  boxShadow: "0 12px 28px rgba(21,128,61,.25)",
 };
-
 
 export default ScanBillScreen;

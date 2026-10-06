@@ -87,9 +87,36 @@ fetchBudgetHistory();
     <div className="app-layout">
     <Sidebar />
 
-    <main className="page-content">
-      <div className="page-card">
-          <h1>💰 Set Budget</h1>
+    <main
+  className="page-content"
+  style={{
+    background: "#F4F7F2",
+    minHeight: "100vh",
+    padding: "35px",
+    fontFamily: "Poppins, sans-serif",
+  }}
+>
+      <div style={cardStyle}>
+          <h1
+  style={{
+    color: "#14532D",
+    fontSize: "34px",
+    fontWeight: "700",
+    marginBottom: "8px",
+  }}
+>
+  Set Budget
+</h1>
+
+<p
+  style={{
+    color: "#64748B",
+    fontSize: "17px",
+    marginBottom: "25px",
+  }}
+>
+  Plan your spending and achieve your savings goals.
+</p>
 
           <form onSubmit={handleSubmit} style={formStyle}>
 
@@ -182,8 +209,17 @@ fetchBudgetHistory();
 </form>
                </div>
 
-        <div className="page-card">
-          <h2>Previous Budget Details</h2>
+        <div style={cardStyle}>
+          <h2
+  style={{
+    color: "#15803D",
+    fontSize: "28px",
+    fontWeight: "700",
+    marginBottom: "20px",
+  }}
+>
+  Previous Budget Details
+</h2>
 
           {budgetHistory.length === 0 ? (
             <p style={{ color: "#6B7280" }}>No previous budgets found.</p>
@@ -191,7 +227,7 @@ fetchBudgetHistory();
             <div style={{ overflowX: "auto" }}>
               <table style={{ width: "100%", minWidth: "500px", borderCollapse: "collapse" }}>
                 <thead>
-                  <tr style={{ background: "#EFF6FF" }}>
+  <tr style={{ background: "#DCFCE7" }}>
                     <th style={tableHead}>Amount</th>
                     <th style={tableHead}>Period</th>
                     <th style={tableHead}>Start Date</th>
@@ -221,15 +257,19 @@ fetchBudgetHistory();
 
 }
 const tableHead = {
-  padding: "12px",
+  padding: "15px",
   textAlign: "left",
-  color: "#374151",
+  background: "#DCFCE7",
+  color: "#14532D",
+  fontWeight: "700",
+  fontSize: "16px",
 };
-
 const tableCell = {
-  padding: "12px",
+  padding: "14px",
   borderTop: "1px solid #E5E7EB",
-  color: "#4B5563",
+  color: "#374151",
+  fontSize: "16px",
+  fontWeight: "500",
 };
 // const mainContent = {
 //   flex: 1,
@@ -247,25 +287,34 @@ const row = {
   display: "flex",
   gap: "20px",
 };
-
+const cardStyle = {
+  background: "#FFFFFF",
+  borderRadius: "24px",
+  padding: "30px",
+  marginBottom: "30px",
+  boxShadow: "0 16px 36px rgba(15,23,42,0.08)",
+  border: "1px solid #E5E7EB",
+};
 const inputGroup = {
   display: "flex",
   flexDirection: "column",
 };
 
 const label = {
-  marginBottom: "8px",
-  fontWeight: "600",
-  color: "#374151",
-  fontSize: "15px",
+  marginBottom: "10px",
+  fontWeight: "700",
+  color: "#14532D",
+  fontSize: "17px",
 };
-
 const input = {
   width: "100%",
-  padding: "12px 15px",
-  border: "1px solid #D1D5DB",
-  borderRadius: "10px",
-  fontSize: "15px",
+  padding: "15px 18px",
+  border: "2px solid #D1FAE5",
+  borderRadius: "14px",
+  background: "#F9FFFB",
+  color: "#14532D",
+  fontSize: "17px",
+  fontWeight: "600",
   outline: "none",
   boxSizing: "border-box",
 };
@@ -280,15 +329,16 @@ const input = {
 // };
 
 const buttonStyle = {
-  marginTop: "10px",
+  marginTop: "18px",
   width: "100%",
-  padding: "14px",
-  background: "#2563EB",
-  color: "#fff",
+  padding: "16px",
+  background: "linear-gradient(135deg,#15803D,#22C55E)",
+  color: "#FFFFFF",
   border: "none",
-  borderRadius: "10px",
-  fontSize: "17px",
-  fontWeight: "600",
+  borderRadius: "14px",
+  fontSize: "18px",
+  fontWeight: "700",
   cursor: "pointer",
+  boxShadow: "0 12px 30px rgba(21,128,61,.25)",
 };
 export default BudgetScreen;
